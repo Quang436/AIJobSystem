@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.schemas.user_schema import (
     UserRegister,
     UserLogin
@@ -11,6 +11,7 @@ from app.utils.jwt_handler import (
     create_access_token
 )
 from app.database.database import get_connection
+from app.middleware.auth_middleware import get_current_user
 
 router = APIRouter()
 
@@ -86,4 +87,46 @@ def login(user: UserLogin):
     return {
         "access_token": token,
         "token_type": "bearer"
+    }
+
+
+@router.get("/profile")
+def get_profile(current_user: dict = Depends(get_current_user)):
+    """
+    Protected endpoint - Yêu cầu JWT token
+    Trả về thông tin user hiện tại
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+        SELECT 
+            id,
+            fullname,
+            email,
+            role,
+            gps_lat,
+            gps_lng,
+            ready_to_work,
+            created_at
+        FROM users
+        WHERE id = ?
+    """, (current_user["user_id"],))
+    
+    user = cursor.fetchone()
+    
+    if not user:
+        return {
+            "message": "User not found"
+        }
+    
+    return {
+        "id": user.id,
+        "fullname": user.fullname,
+        "email": user.email,
+        "role": user.role,
+        "gps_lat": user.gps_lat,
+        "gps_lng": user.gps_lng,
+        "ready_to_work": user.ready_to_work,
+        "created_at": str(user.created_at)
     }

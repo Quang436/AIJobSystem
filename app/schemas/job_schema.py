@@ -11,4 +11,4 @@ class JobCreate(BaseModel):
     skills: str
     source: str
     status: str
-    created_by: int
+    # Không cần created_by nữa vì lấy từ JWT token

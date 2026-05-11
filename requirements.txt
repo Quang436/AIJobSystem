@@ -1,7 +1,7 @@
 annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.13.0
-bcrypt==5.0.0
+bcrypt==4.0.1
 click==8.3.3
 colorama==0.4.6
 ecdsa==0.19.2
@@ -13,9 +13,11 @@ passlib==1.7.4
 pyasn1==0.6.3
 pydantic==2.13.4
 pydantic_core==2.46.4
+email-validator==2.3.0
 pyodbc==5.3.0
 python-dotenv==1.2.2
 python-jose==3.5.0
+python-multipart==0.0.22
 rsa==4.9.1
 six==1.17.0
 SQLAlchemy==2.0.49
@@ -23,3 +25,24 @@ starlette==1.0.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 uvicorn==0.46.0
+
+# Thư viện cho tính năng Location & Distance
+geopy==2.4.1
+
+# Thư viện cho AI/ML Recommendation
+scikit-learn==1.5.2
+
+# Thư viện cho Data Processing
+pandas==2.2.3
+numpy==2.1.3
+
+# Thư viện cho Web Crawling
+selenium==4.27.1
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# Thư viện cho HTTP Requests
+requests==2.32.3
+
+# Thư viện cho Google Maps API (optional)
+googlemaps==4.10.0
