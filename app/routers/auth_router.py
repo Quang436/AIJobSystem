@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
 from app.schemas.user_schema import (
     UserRegister,
-    UserLogin
+    UserLogin,
+    UserProfileUpdate
 )
 from app.utils.auth import (
     hash_password,
@@ -129,4 +130,61 @@ def get_profile(current_user: dict = Depends(get_current_user)):
         "gps_lng": user.gps_lng,
         "ready_to_work": user.ready_to_work,
         "created_at": str(user.created_at)
+    }
+
+
+@router.put("/profile/update")
+def update_profile(
+    profile_data: UserProfileUpdate,
+    current_user: dict = Depends(get_current_user)
+):
+    """
+    Protected endpoint - Yêu cầu JWT token
+    Update thông tin profile của user hiện tại
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    # Build dynamic UPDATE query based on provided fields
+    update_fields = []
+    update_values = []
+    
+    if profile_data.fullname is not None:
+        update_fields.append("fullname = ?")
+        update_values.append(profile_data.fullname)
+    
+    if profile_data.gps_lat is not None:
+        update_fields.append("gps_lat = ?")
+        update_values.append(profile_data.gps_lat)
+    
+    if profile_data.gps_lng is not None:
+        update_fields.append("gps_lng = ?")
+        update_values.append(profile_data.gps_lng)
+    
+    if profile_data.ready_to_work is not None:
+        update_fields.append("ready_to_work = ?")
+        update_values.append(profile_data.ready_to_work)
+    
+    # If no fields to update
+    if not update_fields:
+        return {
+            "message": "No fields to update"
+        }
+    
+    # Add user_id to values
+    update_values.append(current_user["user_id"])
+    
+    # Execute UPDATE query
+    query = f"""
+        UPDATE users
+        SET {', '.join(update_fields)}
+        WHERE id = ?
+    """
+    
+    cursor.execute(query, tuple(update_values))
+    conn.commit()
+    
+    return {
+        "message": "Profile updated successfully",
+        "updated_by": current_user["email"]
     }
