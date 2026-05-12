@@ -1,5 +1,5 @@
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import JWTError, jwt
 from dotenv import load_dotenv
 import os
@@ -9,14 +9,16 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 
-# OAuth2 scheme để lấy token từ header Authorization: Bearer <token>
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+# Chuyển sang HTTPBearer để Swagger hiện ô dán Token (Bearer Token)
+security = HTTPBearer()
 
 
-def get_current_user(token: str = Depends(oauth2_scheme)):
+def get_current_user(auth: HTTPAuthorizationCredentials = Depends(security)):
     """
     Middleware để verify JWT token và trả về thông tin user hiện tại
+    auth.credentials chính là chuỗi token sau chữ 'Bearer '
     """
+    token = auth.credentials
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -39,7 +41,6 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         if user_id is None or email is None:
             raise credentials_exception
             
-        # Trả về dict chứa thông tin user
         return {
             "user_id": user_id,
             "email": email,

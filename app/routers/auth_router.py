@@ -18,77 +18,43 @@ router = APIRouter()
 
 @router.post("/register")
 def register(user: UserRegister):
-
     conn = get_connection()
-    cursor = conn.cursor()
-
-    hashed_pw = hash_password(
-        user.password
-    )
-
-    cursor.execute("""
-        INSERT INTO users
-        (
-            fullname,
-            email,
-            password_hash,
-            role
-        )
-        VALUES (?, ?, ?, ?)
-    """,
-    (
-        user.fullname,
-        user.email,
-        hashed_pw,
-        user.role
-    ))
-
-    conn.commit()
-
-    return {
-        "message": "Register success"
-    }
+    try:
+        cursor = conn.cursor()
+        hashed_pw = hash_password(user.password)
+        cursor.execute("""
+            INSERT INTO users (fullname, email, password_hash, role)
+            VALUES (?, ?, ?, ?)
+        """, (user.fullname, user.email, hashed_pw, user.role))
+        conn.commit()
+        return {"message": "Register success"}
+    finally:
+        conn.close()
 
 @router.post("/login")
 def login(user: UserLogin):
-
     conn = get_connection()
-    cursor = conn.cursor()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, email, password_hash, role FROM users WHERE email = ?", (user.email,))
+        db_user = cursor.fetchone()
 
-    cursor.execute("""
-        SELECT * FROM users
-        WHERE email = ?
-    """, (user.email,))
+        # Bảo mật: Dùng chung một thông báo lỗi
+        if not db_user or not verify_password(user.password, db_user.password_hash):
+            return {"message": "Invalid email or password"}
 
-    db_user = cursor.fetchone()
+        token = create_access_token({
+            "user_id": db_user.id,
+            "email": db_user.email,
+            "role": db_user.role
+        })
 
-    if not db_user:
         return {
-            "message": "Email not found"
+            "access_token": token,
+            "token_type": "bearer"
         }
-
-    stored_password = db_user.password_hash
-
-    is_valid = verify_password(
-        user.password,
-        stored_password
-    )
-
-    if not is_valid:
-        return {
-            "message": "Wrong password"
-        }
-
-    token = create_access_token({
-        "user_id": db_user.id,
-        "email": db_user.email,
-        "role": db_user.role
-    })
-
-    return {
-        "access_token": token,
-        "token_type": "bearer"
-    }
+    finally:
+        conn.close()
 
 
 @router.get("/profile")
