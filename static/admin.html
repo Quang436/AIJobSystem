@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Job Recommendation — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">AI·JobOps</div>
+        <div class="brand-sub">Admin Console</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">ĐIỀU KHIỂN</div>
+      <a href="#" class="nav-item active" data-tab="bots">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+        Bot Controller
+        <span class="nav-badge" id="badge-running">0</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="review">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Data Review
+        <span class="nav-badge pending" id="badge-pending">0</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="analytics">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+
+      <div class="nav-label" style="margin-top:24px">HỆ THỐNG</div>
+      <a href="#" class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        API Monitor
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Accounts
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-dot online"></div>
+      <span>API: <code>localhost:8000</code></span>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" onclick="document.getElementById('sidebar').classList.toggle('collapsed')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="breadcrumb" id="breadcrumb">Bot Controller</div>
+      </div>
+      <div class="topbar-right">
+        <div class="clock" id="clock">--:--:--</div>
+        <button class="btn-refresh" onclick="refreshCurrentTab()" title="Refresh dữ liệu">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+        <div class="avatar">AD</div>
+      </div>
+    </header>
+
+    <!-- TOAST -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ======================== TAB 1: BOT CONTROLLER ======================== -->
+    <section class="tab-panel active" id="tab-bots">
+
+      <div class="section-header">
+        <h2 class="section-title">Bot Controller <span class="section-title-accent">& Monitoring</span></h2>
+        <p class="section-desc">Điều khiển lịch chạy và theo dõi tiến độ crawler bot theo thời gian thực.</p>
+      </div>
+
+      <!-- Emergency Commands -->
+      <div class="card emergency-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="pulse-dot"></span>
+            Lệnh Cào Khẩn Cấp
+          </div>
+          <div class="card-subtitle">Kích hoạt bot chạy ngay lập tức, bỏ qua lịch đặt sẵn</div>
+        </div>
+        <div class="emergency-buttons">
+          <button class="btn-emergency fb" onclick="runBotNow('facebook')" id="btn-fb">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Chạy Bot Facebook Ngay
+            <span class="btn-spinner" id="spinner-fb"></span>
+          </button>
+          <button class="btn-emergency topcv" onclick="runBotNow('topcv')" id="btn-topcv">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Chạy Bot TopCV Ngay
+            <span class="btn-spinner" id="spinner-topcv"></span>
+          </button>
+          <button class="btn-emergency" onclick="runBotNow('itviec')" id="btn-itviec">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h16"/></svg>
+            Chạy Bot ITviec Ngay
+            <span class="btn-spinner" id="spinner-itviec"></span>
+          </button>
+          <button class="btn-emergency" onclick="runBotNow('vietnamworks')" id="btn-vietnamworks">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="M7 10h10M7 14h6"/></svg>
+            Chạy Bot VietnamWorks Ngay
+            <span class="btn-spinner" id="spinner-vietnamworks"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Schedule Config -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Lịch Chạy Tự Động</div>
+          <div class="card-subtitle">Cài đặt chu kỳ chạy định kỳ cho từng bot</div>
+        </div>
+        <div class="schedule-grid">
+          <div class="schedule-item">
+            <label class="schedule-label">Facebook Crawler</label>
+            <div class="schedule-controls">
+              <select class="select-field" id="schedule-fb" onchange="updateSchedule('facebook', this.value)">
+                <option value="08:00">08:00 sáng</option>
+                <option value="12:00" selected>12:00 trưa</option>
+                <option value="18:00">18:00 chiều</option>
+                <option value="22:00">22:00 tối</option>
+                <option value="*/6h">Mỗi 6 tiếng</option>
+                <option value="*/12h">Mỗi 12 tiếng</option>
+              </select>
+              <div class="toggle-switch active" id="toggle-fb" onclick="toggleSchedule('facebook', this)">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <label class="schedule-label">TopCV Crawler</label>
+            <div class="schedule-controls">
+              <select class="select-field" id="schedule-topcv" onchange="updateSchedule('topcv', this.value)">
+                <option value="08:00" selected>08:00 sáng</option>
+                <option value="12:00">12:00 trưa</option>
+                <option value="18:00">18:00 chiều</option>
+                <option value="22:00">22:00 tối</option>
+                <option value="*/6h">Mỗi 6 tiếng</option>
+                <option value="*/12h">Mỗi 12 tiếng</option>
+              </select>
+              <div class="toggle-switch" id="toggle-topcv" onclick="toggleSchedule('topcv', this)">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <label class="schedule-label">ITviec Crawler</label>
+            <div class="schedule-controls">
+              <select class="select-field" id="schedule-itviec" onchange="updateSchedule('itviec', this.value)">
+                <option value="08:00" selected>08:00 sáng</option>
+                <option value="12:00">12:00 trưa</option>
+                <option value="18:00">18:00 chiều</option>
+                <option value="22:00">22:00 tối</option>
+                <option value="*/6h">Mỗi 6 tiếng</option>
+                <option value="*/12h">Mỗi 12 tiếng</option>
+              </select>
+              <div class="toggle-switch" id="toggle-itviec" onclick="toggleSchedule('itviec', this)">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <label class="schedule-label">VietnamWorks Crawler</label>
+            <div class="schedule-controls">
+              <select class="select-field" id="schedule-vietnamworks" onchange="updateSchedule('vietnamworks', this.value)">
+                <option value="08:00" selected>08:00 sáng</option>
+                <option value="12:00">12:00 trưa</option>
+                <option value="18:00">18:00 chiều</option>
+                <option value="22:00">22:00 tối</option>
+                <option value="*/6h">Mỗi 6 tiếng</option>
+                <option value="*/12h">Mỗi 12 tiếng</option>
+              </select>
+              <div class="toggle-switch" id="toggle-vietnamworks" onclick="toggleSchedule('vietnamworks', this)">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crawler Tuning & Facebook Groups Card -->
+      <div class="card" id="config-card">
+        <div class="card-header">
+          <div class="card-title">Cấu Hình Facebook</div>
+          <div class="card-subtitle">Thiết lập riêng cho Facebook: số bài, số group, độ cũ bài đăng và danh sách group.</div>
+        </div>
+        
+        <div class="config-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 16px;">
+          <!-- Left Col: Parameters -->
+          <div class="config-col" style="display: flex; flex-direction: column; gap: 16px;">
+            <h3 style="font-family: 'Syne', sans-serif; font-size: 16px; margin: 0; color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Tham Số Hệ Thống</h3>
+            
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 600; font-size: 13px;">Số bài đăng tối đa mỗi Group / mỗi lần cào</label>
+              <input type="number" class="input-field" id="cfg-max-posts" placeholder="5" style="width: 100%;" />
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 600; font-size: 13px;">Số Group tối đa chạy mỗi phiên cào (Facebook)</label>
+              <input type="number" class="input-field" id="cfg-max-groups" placeholder="3" style="width: 100%;" />
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 600; font-size: 13px;">Hạn chế bài đăng cũ hơn (Số ngày tối đa)</label>
+              <input type="number" class="input-field" id="cfg-max-days" placeholder="3" style="width: 100%;" />
+              <div class="form-hint" style="font-size: 11px; color: #64748b; margin-top: 4px;">Ví dụ: 3 tức là chỉ lấy các bài đăng trong vòng 3 ngày gần nhất.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 600; font-size: 13px;">Chế độ kiểm duyệt nội dung</label>
+              <select class="select-field" id="cfg-moderation-mode" style="width: 100%;">
+                <option value="manual">Duyệt thủ công</option>
+                <option value="auto">Tự động duyệt</option>
+              </select>
+              <div class="form-hint" style="font-size: 11px; color: #64748b; margin-top: 4px;">Manual sẽ đưa job mới vào hàng đợi pending. Auto sẽ duyệt ngay nhưng vẫn ghi nhận chỉnh sửa để bot học.</div>
+            </div>
+
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer;">
+              <input type="checkbox" id="cfg-learn-from-admin" checked />
+              Ghi nhận các lần admin chỉnh sửa để bot học
+            </label>
+            
+            <button class="btn-approve" onclick="saveBotConfig()" style="align-self: flex-start; padding: 10px 20px; font-size: 14px; font-weight: 600; border-radius: 6px;">Lưu Cấu Hình</button>
+          </div>
+          
+          <!-- Right Col: Facebook Groups List -->
+          <div class="config-col" style="display: flex; flex-direction: column; gap: 16px;">
+            <h3 style="font-family: 'Syne', sans-serif; font-size: 16px; margin: 0; color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Quản Lý Nhóm Facebook Cào Tin</h3>
+            
+            <!-- Add group form -->
+            <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1; display: flex; flex-direction: column; gap: 10px;">
+              <div style="font-size: 12px; font-weight: 600; color: #475569;">Thêm Group Facebook Mới</div>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" class="input-field" id="new-group-name" placeholder="Tên nhóm (ví dụ: Việc làm Đà Nẵng)" style="flex: 1; font-size: 12px; height: 36px; padding: 0 10px;" />
+                <input type="text" class="input-field" id="new-group-url" placeholder="https://www.facebook.com/groups/..." style="flex: 1.5; font-size: 12px; height: 36px; padding: 0 10px;" />
+                <button class="btn-approve" onclick="addNewGroup()" style="padding: 0 14px; font-size: 18px; line-height: 1; border-radius: 6px; height: 36px;">+</button>
+              </div>
+            </div>
+
+            <!-- Group list container -->
+            <div style="max-height: 250px; overflow-y: auto; padding-right: 4px;" id="fb-groups-list-container">
+              <div style="text-align: center; color: #64748b; padding: 20px; font-size: 12px;">Đang tải danh sách nhóm...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Cấu Hình TopCV</div>
+          <div class="card-subtitle">Thiết lập riêng cho TopCV, tách biệt hoàn toàn với các nguồn còn lại.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;align-items:end;">
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Bật crawler TopCV</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer;">
+              <input type="checkbox" id="cfg-topcv-enabled" checked />
+              Active / Inactive
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Số trang mặc định mỗi lần crawl</label>
+            <input type="number" class="input-field" id="cfg-topcv-max-pages" min="1" value="2" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Headless</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer;">
+              <input type="checkbox" id="cfg-topcv-headless" checked />
+              Chạy ẩn trình duyệt
+            </label>
+          </div>
+          <button class="btn-approve" onclick="saveSourceConfig('topcv')" style="align-self:flex-start;padding:10px 20px;font-size:14px;font-weight:600;border-radius:6px;">Lưu TopCV</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Cấu Hình ITviec</div>
+          <div class="card-subtitle">Thiết lập riêng cho ITviec.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;align-items:end;">
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Bật crawler ITviec</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer;">
+              <input type="checkbox" id="cfg-itviec-enabled" checked />
+              Active / Inactive
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Số trang mặc định mỗi lần crawl</label>
+            <input type="number" class="input-field" id="cfg-itviec-max-pages" min="1" value="1" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Headless</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer;">
+              <input type="checkbox" id="cfg-itviec-headless" checked />
+              Chạy ẩn trình duyệt
+            </label>
+          </div>
+          <button class="btn-approve" onclick="saveSourceConfig('itviec')" style="align-self:flex-start;padding:10px 20px;font-size:14px;font-weight:600;border-radius:6px;">Lưu ITviec</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Cấu Hình VietnamWorks</div>
+          <div class="card-subtitle">Thiết lập riêng cho VietnamWorks.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;align-items:end;">
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Bật crawler VietnamWorks</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer;">
+              <input type="checkbox" id="cfg-vietnamworks-enabled" checked />
+              Active / Inactive
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Số trang mặc định mỗi lần crawl</label>
+            <input type="number" class="input-field" id="cfg-vietnamworks-max-pages" min="1" value="2" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-weight:600;font-size:13px;">Headless</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer;">
+              <input type="checkbox" id="cfg-vietnamworks-headless" checked />
+              Chạy ẩn trình duyệt
+            </label>
+          </div>
+          <button class="btn-approve" onclick="saveSourceConfig('vietnamworks')" style="align-self:flex-start;padding:10px 20px;font-size:14px;font-weight:600;border-radius:6px;">Lưu VietnamWorks</button>
+        </div>
+      </div>
+
+      <!-- Tasks Table -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Tiến Độ Chạy</div>
+          <div class="card-actions">
+            <button class="btn-sm" onclick="fetchTasks()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="tasks-table">
+            <thead>
+              <tr>
+                <th>Tên Bot</th>
+                <th>Trạng Thái</th>
+                <th>Jobs đã cào</th>
+                <th>Lần chạy cuối</th>
+                <th>Tiến độ</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="tasks-tbody">
+              <tr><td colspan="6" class="table-loading"><div class="spinner"></div> Đang tải...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================== TAB 2: DATA REVIEW ======================== -->
+    <section class="tab-panel" id="tab-review">
+
+      <div class="section-header">
+        <h2 class="section-title">Data Review <span class="section-title-accent">& Active Learning</span></h2>
+        <p class="section-desc">Kiểm duyệt công việc đang chờ duyệt, chỉnh sửa để dạy lại AI (Active Learning).</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="card filter-bar">
+        <div class="filter-group">
+          <input type="text" class="input-field" placeholder="🔍 Tìm kiếm công việc..." id="search-jobs" oninput="filterJobs()" />
+          <select class="select-field" id="filter-source" onchange="filterJobs()">
+            <option value="">Tất cả nguồn</option>
+            <option value="facebook">Facebook</option>
+            <option value="topcv">TopCV</option>
+            <option value="itviec">ITViec</option>
+          </select>
+          <select class="select-field" id="filter-status" onchange="filterJobs()">
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+        <div class="filter-stats" id="filter-stats">— bản ghi</div>
+      </div>
+
+      <!-- Jobs List -->
+      <div class="card">
+        <div class="table-wrap">
+          <table class="data-table" id="jobs-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tiêu đề (AI)</th>
+                <th>Nguồn</th>
+                <th>Lương (AI)</th>
+                <th>Địa chỉ (AI)</th>
+                <th>Ngày cào</th>
+                <th>Trạng thái</th>
+                <th>Chi tiết</th>
+              </tr>
+            </thead>
+            <tbody id="jobs-tbody">
+              <tr><td colspan="8" class="table-loading"><div class="spinner"></div> Đang tải...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================== TAB 3: ANALYTICS ======================== -->
+    <section class="tab-panel" id="tab-analytics">
+
+      <div class="section-header">
+        <h2 class="section-title">System <span class="section-title-accent">Analytics</span></h2>
+        <p class="section-desc">Tổng quan số liệu và hiệu suất của toàn hệ thống AI Job Recommendation.</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card" data-key="active_jobs">
+          <div class="stat-icon jobs">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-jobs">—</div>
+            <div class="stat-label">Tổng Jobs Active</div>
+          </div>
+          <div class="stat-trend up">↑ 12%</div>
+        </div>
+        <div class="stat-card" data-key="active_users">
+          <div class="stat-icon users">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-users">—</div>
+            <div class="stat-label">Users Sẵn Sàng</div>
+          </div>
+          <div class="stat-trend up">↑ 8%</div>
+        </div>
+        <div class="stat-card" data-key="new_applications">
+          <div class="stat-icon apps">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-apps">—</div>
+            <div class="stat-label">Ứng Tuyển Mới</div>
+          </div>
+          <div class="stat-trend up">↑ 23%</div>
+        </div>
+        <div class="stat-card" data-key="avg_rating">
+          <div class="stat-icon rating">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-rating">—</div>
+            <div class="stat-label">Đánh Giá TB</div>
+          </div>
+          <div class="stat-trend neutral">→ 0%</div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="card chart-card">
+          <div class="card-header">
+            <div class="card-title">Tỷ Lệ Nguồn Job</div>
+            <div class="card-subtitle">Phân bổ dữ liệu theo nguồn crawler</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="sourceChart"></canvas>
+          </div>
+          <div class="chart-legend" id="pie-legend"></div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="card-header">
+            <div class="card-title">Jobs Theo Tuần</div>
+            <div class="card-subtitle">Số lượng job mới crawl được 7 ngày gần nhất</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="weeklyChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ======================== MODAL: JOB REVIEW ======================== -->
+  <div class="modal-overlay" id="reviewModal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Chi Tiết Công Việc</div>
+          <div class="modal-subtitle" id="modal-job-id">Job #—</div>
+        </div>
+        <button class="modal-close" onclick="closeReviewModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Left: Raw content -->
+        <div class="modal-left">
+          <div class="raw-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Nội Dung Gốc (Bot Crawled)
+          </div>
+          <div class="raw-content" id="modal-raw-content">—</div>
+          <div class="raw-meta">
+            <span id="modal-source-badge" class="source-badge">—</span>
+            <span id="modal-crawled-at">Crawled: —</span>
+          </div>
+          <div style="margin-top:10px; font-size:12px; color:#64748b; word-break: break-all;">
+            Nguồn: <a id="modal-source-url" href="#" target="_blank" style="color:#3b82f6; text-decoration:none;">—</a>
+          </div>
+        </div>
+        <!-- Right: AI fields form -->
+        <div class="modal-right">
+          <div class="raw-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Dữ Liệu AI Bóc Tách
+            <span class="ai-badge">AI</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tiêu đề công việc</label>
+            <input type="text" class="input-field" id="field-title" placeholder="Job title..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tên công ty</label>
+            <input type="text" class="input-field" id="field-company" placeholder="Tên công ty..." />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Lương MIN (VNĐ)</label>
+              <input type="number" class="input-field" id="field-salary-min" placeholder="5000000" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Lương MAX (VNĐ)</label>
+              <input type="number" class="input-field" id="field-salary-max" placeholder="15000000" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Địa chỉ làm việc</label>
+            <input type="text" class="input-field" id="field-location" placeholder="Thành phố, Quận..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kỹ năng yêu cầu</label>
+            <input type="text" class="input-field" id="field-skills" placeholder="React, Node.js, SQL..." />
+            <div class="form-hint">Phân cách bằng dấu phẩy</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kinh nghiệm</label>
+            <select class="select-field" id="field-experience">
+              <option value="">— Chưa xác định —</option>
+              <option value="0">Không yêu cầu</option>
+              <option value="1">1 năm</option>
+              <option value="2">2 năm</option>
+              <option value="3">3 năm</option>
+              <option value="5">5+ năm</option>
+            </select>
+          </div>
+          <!-- Diff indicator -->
+          <div class="diff-indicator" id="diff-indicator" style="display:none">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Bạn đã chỉnh sửa — Hệ thống sẽ ghi nhận để dạy lại AI
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-reject" onclick="reviewJob('reject')" id="btn-reject">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Từ Chối (Spam/Lừa đảo)
+        </button>
+        <button class="btn-approve" onclick="reviewJob('approve')" id="btn-approve">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Duyệt &amp; Dạy AI
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

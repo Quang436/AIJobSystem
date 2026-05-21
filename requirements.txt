@@ -46,3 +46,6 @@ requests==2.32.3
 
 # Thư viện cho Google Maps API (optional)
 googlemaps==4.10.0
+
+# Thư viện cho HTML parsing
+html5lib==1.1

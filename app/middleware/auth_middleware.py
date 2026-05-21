@@ -57,7 +57,9 @@ def require_role(allowed_roles: list):
     Sử dụng: Depends(require_role(["admin", "employer"]))
     """
     def role_checker(current_user: dict = Depends(get_current_user)):
-        if current_user["role"] not in allowed_roles:
+        user_role = current_user["role"].lower() if current_user["role"] else ""
+        allowed_roles_lower = [r.lower() for r in allowed_roles]
+        if user_role not in allowed_roles_lower:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail=f"Access denied. Required roles: {', '.join(allowed_roles)}"

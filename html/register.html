@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Đăng Ký - GeoJob</title>
+  <link rel="stylesheet" href="../css/globals.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+</head>
+
+<body>
+  <nav class="auth-nav">
+    <div class="auth-nav-container">
+      <a href="index.html" class="auth-logo">GeoJob</a>
+      <div class="auth-nav-links">
+        <a href="index.html" class="auth-nav-link">Trang Chủ</a>
+        <a href="login.html" class="auth-nav-link">Đăng Nhập</a>
+        <a href="register.html" class="auth-nav-link active">Đăng Ký</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-bg-pattern"></div>
+    <div class="auth-bg-shapes">
+      <div class="auth-shape"></div>
+      <div class="auth-shape"></div>
+      <div class="auth-shape"></div>
+    </div>
+
+    <div class="auth-card-wrapper">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1 class="auth-title">Đăng Ký</h1>
+          <p class="auth-subtitle">Tạo tài khoản mới để bắt đầu tìm kiếm công việc phù hợp</p>
+        </div>
+
+        <div id="registerError" class="auth-error" style="display: none;"></div>
+        <div id="registerSuccess" class="auth-success" style="display: none;"></div>
+
+        <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label class="form-label" for="fullname">Họ và tên</label>
+            <div class="form-input-wrapper">
+              <input class="form-input" type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên của bạn"
+                required aria-required="true" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Số điện thoại</label>
+            <div class="form-input-wrapper">
+              <input class="form-input" type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required
+                aria-required="true" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <div class="form-input-wrapper">
+              <input class="form-input" type="email" id="email" name="email" placeholder="Nhập email của bạn" required
+                aria-required="true" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Mật khẩu</label>
+            <div class="form-input-wrapper">
+              <input class="form-input" type="password" id="password" name="password"
+                placeholder="Nhập mật khẩu (tối thiểu 8 ký tự)" required aria-required="true" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirm-password">Xác nhận mật khẩu</label>
+            <div class="form-input-wrapper">
+              <input class="form-input" type="password" id="confirm-password" name="confirm-password"
+                placeholder="Nhập lại mật khẩu" required aria-required="true" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Loại tài khoản</label>
+            <div class="role-selection" style="display: flex; gap: 20px; align-items: center; margin-top: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="role" value="job_seeker" checked onchange="toggleRoleForms()" /> Người tìm
+                việc
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="role" value="employer" onchange="toggleRoleForms()" /> Nhà tuyển dụng
+              </label>
+            </div>
+          </div>
+
+          <!-- ======================= Form JOB SEEKER ======================= -->
+          <div id="jobSeekerSection">
+            <div class="form-group">
+              <label class="form-label" for="job_seeker_type">Loại hình công việc</label>
+              <div class="form-input-wrapper">
+                <select class="form-input" id="job_seeker_type" name="job_seeker_type" onchange="toggleJobSeekerType()">
+                  <option value="office">Khối Văn phòng / Chuyên môn (Kế toán, Marketing, Sale...)</option>
+                  <option value="skilled">Khối Lao động / Thợ tự do (Điện nước, Xây dựng, Giao hàng...)</option>
+                  <option value="parttime">Lao động phổ thông / Part-time (Phục vụ, Cafe, Nhà hàng...)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- CANDIDATE (Office) -->
+            <div id="jsOfficeFields">
+              <div class="form-group">
+                <label class="form-label" for="degree_level">Trình độ học vấn</label>
+                <div class="form-input-wrapper">
+                  <select class="form-input" id="degree_level">
+                    <option value="HighSchool">THPT</option>
+                    <option value="College">Cao đẳng</option>
+                    <option value="Bachelors" selected>Đại học</option>
+                    <option value="Masters">Thạc sĩ</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="institution_name">Trường học / Đơn vị đào tạo</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="text" id="institution_name" placeholder="VD: Đại học Kinh Tế..." />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="desired_level">Vị trí mong muốn</label>
+                <div class="form-input-wrapper">
+                  <select class="form-input" id="desired_level">
+                    <option value="Intern">Intern</option>
+                    <option value="Fresher" selected>Fresher</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="industry">Ngành nghề</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="text" id="industry" placeholder="VD: Kế toán, Nhân sự, IT, Sale..." />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="desired_salary">Mức lương mong muốn (VNĐ)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="number" id="desired_salary" placeholder="VD: 15000000" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cv_file">Upload CV (File URL / Link Drive)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="url" id="cv_file"
+                    placeholder="Nhập đường dẫn CV chi tiết nhất có thể..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- GIG WORKER (Skilled) -->
+            <div id="jsSkilledFields" style="display: none;">
+              <div class="form-group">
+                <label class="form-label" for="cccd_number">Số CCCD (Bắt buộc)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="text" id="cccd_number" placeholder="Nhập số CCCD minh chứng" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="professional_category">Lĩnh vực chuyên môn</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="text" id="professional_category"
+                    placeholder="VD: Thợ sửa điện, Sửa ống nước..." />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="max_travel_distance">Bán kính di chuyển tối đa (km)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="number" id="max_travel_distance" value="15" placeholder="VD: 15" />
+                </div>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <div class="form-group" style="flex: 1;">
+                  <label class="form-label" for="min_price">Khung giá Tối thiểu (VNĐ)</label>
+                  <div class="form-input-wrapper">
+                    <input class="form-input" type="number" id="min_price" value="100000" />
+                  </div>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label class="form-label" for="max_price">Khung giá Tối đa (VNĐ)</label>
+                  <div class="form-input-wrapper">
+                    <input class="form-input" type="number" id="max_price" value="500000" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="certificates">Giấy phép hành nghề / Chứng chỉ (Link ảnh)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="url" id="certificates" placeholder="Đường dẫn minh chứng..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- PART-TIME / COMMON LABOR -->
+            <div id="jsParttimeFields" style="display: none;">
+              <div class="form-group">
+                <label class="form-label" for="parttime_industry">Lĩnh vực công việc</label>
+                <div class="form-input-wrapper">
+                  <select class="form-input" id="parttime_industry">
+                    <option value="F&B">Nhà hàng / Quán Cafe (F&B)</option>
+                    <option value="Retail">Bán hàng / Siêu thị / Cửa hàng</option>
+                    <option value="Service">Dịch vụ / Chăm sóc khách hàng</option>
+                    <option value="Other">Khác</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="parttime_salary">Mức lương mong muốn (VNĐ / Tháng hoặc Ca)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="number" id="parttime_salary" placeholder="VD: 5000000" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ======================= Form EMPLOYER ======================= -->
+          <div id="employerSection" style="display: none;">
+            <div class="form-group">
+              <label class="form-label" for="company-name">Tên Công Ty / Tên Thương Hiệu Pháp Lý</label>
+              <div class="form-input-wrapper">
+                <input class="form-input" type="text" id="company-name"
+                  placeholder="VD: Công ty Cổ phần Công nghệ XYZ" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="tax_code">Mã Số Thuế (Bắt buộc kiểm duyệt)</label>
+              <div class="form-input-wrapper">
+                <input class="form-input" type="text" id="tax_code" placeholder="Nhập mã số thuế doanh nghiệp" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="headquarter_address">Địa chỉ trụ sở chính</label>
+              <div class="form-input-wrapper">
+                <input class="form-input" type="text" id="headquarter_address"
+                  placeholder="Nhập địa chỉ đầy đủ trụ sở" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="employer_type">Quy mô / Loại hình</label>
+              <div class="form-input-wrapper">
+                <select class="form-input" id="employer_type" name="employer_type" onchange="toggleEmployerType()">
+                  <option value="corporate">Công ty / Doanh nghiệp Lớn</option>
+                  <option value="small_business">Hộ KD / Small Business</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Corporate Only -->
+            <div id="empCorporateFields">
+              <div class="form-group">
+                <label class="form-label" for="business_license">Giấy phép kinh doanh (Link URL)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="url" id="business_license" placeholder="Link pháp lý công ty..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Small Business Only -->
+            <div id="empSmallBusinessFields" style="display: none;">
+              <div class="form-group">
+                <label class="form-label" for="manager_name">Tên người quản lý</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="text" id="manager_name" placeholder="Tên để liên lạc" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="manager_phone">Số điện thoại quản lý</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="tel" id="manager_phone" placeholder="Số quản lý" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="facility_images">Hình ảnh thực tế văn phòng/quán (Link)</label>
+                <div class="form-input-wrapper">
+                  <input class="form-input" type="url" id="facility_images" placeholder="Yêu cầu hình hiện trạng..." />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <div class="terms-agreement">
+              <input type="checkbox" id="terms" name="terms" required aria-required="true" />
+              <label for="terms">Tôi đồng ý với <a href="#" class="terms-link">điều khoản sử dụng</a> và <a href="#"
+                  class="terms-link">chính sách bảo mật</a></label>
+            </div>
+          </div>
+
+          <button class="auth-submit-btn" type="submit" id="registerBtn">
+            Đăng Ký
+          </button>
+        </form>
+
+        <div class="social-login">
+          <div class="social-divider">
+            <span>Hoặc đăng ký với</span>
+          </div>
+          <div class="social-buttons">
+            <button class="social-btn google" type="button">
+              <span>Google</span>
+            </button>
+            <button class="social-btn github" type="button">
+              <span>GitHub</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-footer">
+          <p class="auth-footer-text">Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script>
+    async function handleRegister(event) {
+      event.preventDefault();
+
+      const fullname = document.getElementById('fullname').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      const role = document.querySelector('input[name="role"]:checked').value;
+      const terms = document.getElementById('terms').checked;
+      const registerBtn = document.getElementById('registerBtn');
+
+      // Validation Base
+      if (!fullname || !email || !password || !confirmPassword || !phone) {
+        showError('Vui lòng điền đầy đủ thông tin bắt buộc');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showError('Mật khẩu xác nhận không khớp');
+        return;
+      }
+
+      if (!terms) {
+        showError('Vui lòng đồng ý với điều khoản sử dụng');
+        return;
+      }
+
+      if (password.length < 8) {
+        showError('Mật khẩu phải có ít nhất 8 ký tự');
+        return;
+      }
+
+      let promise;
+
+      // Xử lý tạo Payload và gọi API theo Role tương ứng
+      if (role === 'job_seeker') {
+        const type = document.getElementById('job_seeker_type').value;
+        if (type === 'office') {
+          // --- CANDIDATE --
+          const degree_level = document.getElementById('degree_level').value;
+          const institution_name = document.getElementById('institution_name').value.trim() || 'Chưa cập nhật';
+          const desired_level = document.getElementById('desired_level').value;
+          const industry = document.getElementById('industry').value.trim() || 'Đa ngành';
+          const desired_salary = parseInt(document.getElementById('desired_salary').value) || 0;
+          const cv_url = document.getElementById('cv_file').value.trim();
+
+          const payload = {
+            common_info: {
+              full_name: fullname,
+              phone: phone,
+              email: email,
+              password: password
+            },
+            education_info: {
+              degree_level: degree_level,
+              institution_name: institution_name,
+              certificate_urls: []
+            },
+            career_info: {
+              desired_level: desired_level,
+              industry: industry,
+              desired_salary: desired_salary,
+              job_category: 'office'
+            },
+            attachment: {
+              cv_url: cv_url || ''
+            }
+          };
+          promise = ApiService.registerCandidate(payload);
+
+        } else if (type === 'parttime') {
+          // --- PART TIME ---
+          const pt_industry = document.getElementById('parttime_industry').options[document.getElementById('parttime_industry').selectedIndex].text;
+          const pt_salary = parseInt(document.getElementById('parttime_salary').value) || 0;
+
+          const payload = {
+            common_info: {
+              full_name: fullname,
+              phone: phone,
+              email: email,
+              password: password
+            },
+            education_info: {
+              degree_level: 'Khác',
+              institution_name: 'Chưa cập nhật',
+              certificate_urls: []
+            },
+            career_info: {
+              desired_level: 'Part-time / Phổ thông',
+              industry: pt_industry,
+              desired_salary: pt_salary
+            },
+            attachment: {
+              cv_url: '' // optional
+            }
+          };
+          promise = ApiService.registerCandidate(payload);
+
+        } else {
+          // --- GIG WORKER ---
+          const cccd = document.getElementById('cccd_number').value.trim();
+          const category = document.getElementById('professional_category').value.trim() || 'Lao động tự do';
+          const max_dist = parseFloat(document.getElementById('max_travel_distance').value) || 15.0;
+          const min_p = parseInt(document.getElementById('min_price').value) || 100000;
+          const max_p = parseInt(document.getElementById('max_price').value) || 500000;
+          const certs = document.getElementById('certificates').value.trim();
+
+          if (!cccd) {
+            showError('Người lao động / Thợ bắt buộc phải cung cấp CCCD');
+            return;
+          }
+
+          const payload = {
+            common_info: {
+              full_name: fullname,
+              phone: phone,
+              email: email,
+              password: password
+            },
+            skill_set: {
+              professional_category: category,
+              skills: [],
+              license_urls: certs ? [certs] : []
+            },
+            working_config: {
+              max_travel_distance_km: max_dist,
+              pricing_range: {
+                min_price_per_task: min_p,
+                max_price_per_task: max_p
+              }
+            },
+            realtime_status: {
+              is_available: true,
+              current_location: { latitude: 21.0, longitude: 105.8 }
+            }
+          };
+          promise = ApiService.registerGigworker(payload);
+        }
+      } else {
+        // --- EMPLOYER ---
+        const companyName = document.getElementById('company-name').value.trim();
+        const taxCode = document.getElementById('tax_code').value.trim() || 'Chưa cập nhật';
+        const hqAddress = document.getElementById('headquarter_address').value.trim() || 'Chưa cập nhật';
+        const type = document.getElementById('employer_type').value;
+
+        if (!companyName) {
+          showError('Vui lòng nhập tên công ty / doanh nghiệp');
+          return;
+        }
+
+        const payload = {
+          legal_info: {
+            tax_code: taxCode,
+            legal_company_name: companyName
+          },
+          contact_verification: {
+            hr_hotline: phone,
+            corporate_email: email,
+            password: password
+          },
+          location_data: {
+            headquarter_address: hqAddress,
+            branches: []
+          },
+          media: {
+            logo_url: '',
+            office_image_urls: []
+          }
+        };
+
+        if (type === 'corporate') {
+          const bizLicense = document.getElementById('business_license').value.trim();
+          if (bizLicense) payload.media.office_image_urls.push(bizLicense);
+        } else {
+          const managerName = document.getElementById('manager_name').value.trim();
+          const managerPhone = document.getElementById('manager_phone').value.trim();
+          const facilityImg = document.getElementById('facility_images').value.trim();
+
+          if (!managerName || !managerPhone) {
+            showError('Quán/Cửa tiệm phải cung cấp tên và SĐT quản lý');
+            return;
+          }
+          payload.contact_verification.hr_hotline = managerPhone;
+          if (facilityImg) payload.media.office_image_urls.push(facilityImg);
+        }
+
+        promise = ApiService.registerEmployer(payload);
+      }
+
+      // Disable button, show loading
+      registerBtn.disabled = true;
+      registerBtn.textContent = 'Đang đăng ký...';
+      document.getElementById('registerError').style.display = 'none';
+
+      try {
+        const data = await promise;
+
+        if (data && data.message && data.message.toLowerCase().includes('success')) {
+          showSuccess('Đăng ký thành công! Đang chuyển đến trang đăng nhập...');
+          UIHelpers.showToast('Đăng ký thành công!', 'success');
+
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1500);
+        } else {
+          showError(data?.message || 'Đăng ký thất bại. Vui lòng thử lại.');
+        }
+      } catch (err) {
+        console.error('Register error:', err);
+        if (err.data && err.data.detail) {
+          // Xử lý lỗi validation từ FastAPI
+          if (Array.isArray(err.data.detail)) {
+            const messages = err.data.detail.map(e => e.msg).join(', ');
+            showError(messages);
+          } else {
+            showError(err.data.detail);
+          }
+        } else if (err.data && err.data.message) {
+          showError(err.data.message);
+        } else {
+          showError('Không thể kết nối đến server. Vui lòng kiểm tra backend đang chạy.');
+        }
+      } finally {
+        registerBtn.disabled = false;
+        registerBtn.textContent = 'Đăng Ký';
+      }
+    }
+
+    function showError(message) {
+      const errorDiv = document.getElementById('registerError');
+      const successDiv = document.getElementById('registerSuccess');
+      successDiv.style.display = 'none';
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+      errorDiv.style.color = '#ef4444';
+      errorDiv.style.background = '#fef2f2';
+      errorDiv.style.padding = '12px 16px';
+      errorDiv.style.borderRadius = '8px';
+      errorDiv.style.marginBottom = '16px';
+      errorDiv.style.fontSize = '14px';
+      errorDiv.style.textAlign = 'center';
+      errorDiv.style.border = '1px solid #fecaca';
+    }
+
+    function showSuccess(message) {
+      const errorDiv = document.getElementById('registerError');
+      const successDiv = document.getElementById('registerSuccess');
+      errorDiv.style.display = 'none';
+      successDiv.textContent = message;
+      successDiv.style.display = 'block';
+      successDiv.style.color = '#059669';
+      successDiv.style.background = '#ecfdf5';
+      successDiv.style.padding = '12px 16px';
+      successDiv.style.borderRadius = '8px';
+      successDiv.style.marginBottom = '16px';
+      successDiv.style.fontSize = '14px';
+      successDiv.style.textAlign = 'center';
+      successDiv.style.border = '1px solid #a7f3d0';
+    }
+
+    // Form validation UX
+    document.addEventListener('DOMContentLoaded', function () {
+      // Nếu đã đăng nhập, redirect
+      if (TokenService.isLoggedIn()) {
+        window.location.href = 'user-dashboard.html';
+        return;
+      }
+
+      const form = document.querySelector('.auth-form');
+      const inputs = form.querySelectorAll('.form-input');
+
+      inputs.forEach(input => {
+        input.addEventListener('input', function () {
+          if (this.value.trim()) {
+            this.classList.remove('error');
+          }
+        });
+
+        input.addEventListener('blur', function () {
+          if (!this.value.trim() && this.hasAttribute('required')) {
+            this.classList.add('error');
+          } else {
+            this.classList.remove('error');
+          }
+        });
+      });
+
+      // Password confirmation validation
+      const password = document.getElementById('password');
+      const confirmPassword = document.getElementById('confirm-password');
+
+      confirmPassword.addEventListener('input', function () {
+        if (password.value !== this.value) {
+          this.classList.add('error');
+        } else {
+          this.classList.remove('error');
+        }
+      });
+    });
+
+    function toggleRoleForms() {
+      const role = document.querySelector('input[name="role"]:checked').value;
+      if (role === 'job_seeker') {
+        document.getElementById('jobSeekerSection').style.display = 'block';
+        document.getElementById('employerSection').style.display = 'none';
+        toggleJobSeekerType();
+      } else {
+        document.getElementById('jobSeekerSection').style.display = 'none';
+        document.getElementById('employerSection').style.display = 'block';
+        toggleEmployerType();
+      }
+    }
+
+    function toggleJobSeekerType() {
+      const type = document.getElementById('job_seeker_type').value;
+      if (type === 'office') {
+        document.getElementById('jsOfficeFields').style.display = 'block';
+        document.getElementById('jsSkilledFields').style.display = 'none';
+        document.getElementById('jsParttimeFields').style.display = 'none';
+      } else if (type === 'parttime') {
+        document.getElementById('jsOfficeFields').style.display = 'none';
+        document.getElementById('jsSkilledFields').style.display = 'none';
+        document.getElementById('jsParttimeFields').style.display = 'block';
+      } else {
+        document.getElementById('jsOfficeFields').style.display = 'none';
+        document.getElementById('jsSkilledFields').style.display = 'block';
+        document.getElementById('jsParttimeFields').style.display = 'none';
+      }
+    }
+
+    function toggleEmployerType() {
+      const type = document.getElementById('employer_type').value;
+      if (type === 'corporate') {
+        document.getElementById('empCorporateFields').style.display = 'block';
+        document.getElementById('empSmallBusinessFields').style.display = 'none';
+      } else {
+        document.getElementById('empCorporateFields').style.display = 'none';
+        document.getElementById('empSmallBusinessFields').style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+
+</html>

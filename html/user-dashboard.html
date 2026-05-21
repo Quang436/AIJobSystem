@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GeoJob - Dashboard</title>
+  <link rel="stylesheet" href="../css/globals.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <style>
+    /* Worker Status Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked+.switch-slider {
+      background-color: #10b981;
+    }
+
+    input:checked+.switch-slider:before {
+      transform: translateX(20px);
+    }
+    
+    .notification-item:hover {
+      background-color: #f8fafc !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tm-kim-vic-lm-qua-bn">
+    <header class="top-nav-bar">
+      <div class="container">
+        <div class="nav-left">
+          <a href="user-dashboard.html" class="text" aria-label="GeoJob trang chủ">GeoJob</a>
+        </div>
+        <form class="search-bar" role="search" action="#" method="get" aria-label="Tìm kiếm công việc"
+          style="display:none;">
+          <input class="search-input" type="search" name="q" placeholder="Tìm kiếm công việc..."
+            aria-label="Tìm kiếm công việc" />
+        </form>
+        <nav class="nav-center" aria-label="Điều hướng chính">
+          <a class="nav-link active" href="user-dashboard.html" aria-current="page">Discover</a>
+          <a class="nav-link" href="map-jobs.html">Bản Đồ</a>
+        </nav>
+        <div class="nav-right" style="display: flex; align-items: center; gap: 16px;">
+          <!-- Notification Bell -->
+          <div style="position: relative; cursor: pointer;" onclick="toggleNotifications(event)">
+            <span style="font-size: 20px;">🔔</span>
+            <span id="notificationBadge" style="display: none; position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; font-size: 10px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">0</span>
+            <!-- Notification Dropdown -->
+            <div id="notificationDropdown" style="display: none; position: absolute; top: 100%; right: 0; width: 300px; background: white; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 1000; margin-top: 10px; max-height: 400px; overflow-y: auto;">
+              <div style="padding: 12px 16px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #1e293b; display: flex; justify-content: space-between; align-items: center;">
+                Thông báo
+                <button onclick="markAllRead(event)" style="background: none; border: none; color: var(--primary, #4F46E5); font-size: 12px; cursor: pointer;">Đánh dấu đã đọc</button>
+              </div>
+              <div id="notificationList" style="padding: 0;">
+                <p style="padding: 20px; text-align: center; color: #64748b; font-size: 13px;">Đang tải thông báo...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hiển thị công tắc nếu là Job Seeker -->
+          <div id="gigWorkerToggleLayer" style="display: none; align-items: center; gap: 8px;">
+            <span style="font-size: 13px; font-weight: 600; color: #475569;" id="workerStatusText">Sẵn sàng nhận việc</span>
+            <label class="switch" title="Bật để nhận thông báo việc làm mới">
+              <input type="checkbox" id="readyToWorkSwitch">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+          <a href="user-profile.html" style="text-decoration: none;">
+            <div class="user-avatar-small" id="userAvatar"
+              style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary, #4F46E5); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; font-size: 16px;"
+              title="Xem hồ sơ của bạn">U</div>
+          </a>
+          <span id="userNameDisplay" style="font-weight: 600; color: var(--text-dark); font-size: 14px;"></span>
+          <button class="button" type="button" onclick="handleLogout()"
+            style="padding: 8px 16px; background: transparent; border: 1px solid var(--primary, #4F46E5); color: var(--primary, #4F46E5); border-radius: 8px; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif; transition: all 0.2s;">
+            Đăng Xuất
+          </button>
+        </div>
+      </div>
+    </header>
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title" id="welcomeTitle">Xin chào!</h1>
+          <p class="hero-description">Tìm kiếm công việc phù hợp với vị trí của bạn một cách nhanh chóng và chính xác
+          </p>
+        </div>
+        <div class="search-section">
+          <form class="dual-search-bar" role="search" action="#" method="get"
+            aria-label="Tìm kiếm công việc theo vị trí">
+            <div class="search-inputs">
+              <div class="search-input-group">
+                <input class="keyword-input" type="text" name="keywords" placeholder="Chức danh, từ khóa hoặc công ty"
+                  aria-label="Chức danh, từ khóa hoặc công ty" />
+              </div>
+              <div class="search-input-group">
+                <input class="location-input" type="text" name="location" placeholder="Thành phố, quận hoặc địa chỉ"
+                  aria-label="Thành phố, quận hoặc địa chỉ" />
+                <button class="current-location-btn" type="button" aria-label="Sử dụng vị trí hiện tại">
+                  📍
+                </button>
+              </div>
+            </div>
+            <button class="search-submit-btn" type="submit" onclick="handleSearch(event)">
+              Tìm Việc
+            </button>
+          </form>
+          <div class="popular-searches">
+            <span class="popular-label">Phổ biến:</span>
+            <div class="popular-tags">
+              <button class="popular-tag" type="button">Hà Nội</button>
+              <button class="popular-tag" type="button">Hồ Chí Minh</button>
+              <button class="popular-tag" type="button">IT</button>
+              <button class="popular-tag" type="button">Phần mềm</button>
+              <button class="popular-tag" type="button">Kế toán</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <main class="main-content-area">
+      <aside class="left-sidebar" aria-label="Bộ lọc và danh sách công việc">
+        <div class="filter-section">
+          <div class="filter-header">
+            <h1 class="text-5">Việc Làm Dành Cho Bạn</h1>
+            <p class="text-6" id="jobCount">Đang tải...</p>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button class="tab-btn active" id="tabAllJobs" onclick="switchTab('all')"
+              style="padding: 6px 14px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s;">Tất cả</button>
+            <button class="tab-btn" id="tabMyApps" onclick="switchTab('applied')"
+              style="padding: 6px 14px; border-radius: 20px; border: 1px solid #e2e8f0; background: white; color: #475569; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s;">Đã ứng tuyển</button>
+            <button class="tab-btn" id="tabRecommend" onclick="switchTab('recommend')"
+              style="padding: 6px 14px; border-radius: 20px; border: 1px solid #e2e8f0; background: white; color: #475569; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s;">Gợi ý</button>
+          </div>
+        </div>
+        <div class="job-list" id="jobListContainer"></div>
+      </aside>
+      <section class="map-section" aria-label="Bản đồ vị trí công việc">
+        <div id="map" class="map-container" style="z-index: 1;"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="jobDetailModal"
+    style="display:none; position:fixed; inset:0; z-index:9000; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px);"
+    onclick="if(event.target===this)closeJobModal()">
+    <div
+      style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(680px,95vw); max-height:90vh; overflow-y:auto; background:#fff; border-radius:20px; box-shadow:0 25px 60px rgba(0,0,0,0.25); font-family:'Inter',sans-serif;">
+      <div id="jobDetailContent" style="padding:32px;"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/worker-tracking.js"></script>
+  <script>
+    let currentMap = null;
+    let userLat = null;
+    let userLng = null;
+    let currentTab = 'all';
+
+    // ==========================================
+    // Role Guard & Profile Load
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', async function () {
+      if (!TokenService.isLoggedIn()) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      try {
+        const profile = await ApiService.getProfile();
+        if (profile && profile.id) {
+          // ROLE CHECK: Redirect if not job seeker
+          if (profile.role !== 'job_seeker') {
+            if (profile.role === 'employer') window.location.href = 'employer-dashboard.html';
+            else if (profile.role === 'admin') window.location.href = 'admin-dashboard.html';
+            return;
+          }
+
+          localStorage.setItem('userName', profile.fullname || 'User');
+          localStorage.setItem('userEmail', profile.email);
+          localStorage.setItem('userRole', profile.role);
+          localStorage.setItem('userId', profile.id);
+
+          const name = profile.fullname || profile.email.split('@')[0];
+          document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+          document.getElementById('userNameDisplay').textContent = name;
+          document.getElementById('welcomeTitle').innerHTML = `Xin chào, ${name}!<br><span>Tìm việc hôm nay nào.</span>`;
+
+          if (profile.gps_lat && profile.gps_lng) {
+            userLat = profile.gps_lat; userLng = profile.gps_lng;
+          }
+
+          // Ready to work toggle logic
+          const isOfficeWorker = profile.job_seeker_type === 'office';
+          const isSkilledWorker = ['skilled', 'Thợ tự do', 'Worker', 'Lao động', 'Part-time', 'Phổ thông'].some(kw => (profile.job_seeker_type || '').includes(kw));
+          
+          if (isOfficeWorker || isSkilledWorker) {
+            document.getElementById('gigWorkerToggleLayer').style.display = 'flex';
+            const statusText = document.getElementById('workerStatusText');
+            statusText.textContent = isOfficeWorker ? 'Sẵn sàng hoạt động (24/7)' : 'Sẵn sàng nhận việc';
+            
+            const toggleSwitch = document.getElementById("readyToWorkSwitch");
+            if (profile.ready_to_work) {
+              toggleSwitch.checked = true;
+              statusText.style.color = '#10b981';
+              if (isSkilledWorker) window.WorkerTracker.startTracking(profile.id);
+            }
+
+            toggleSwitch.addEventListener("change", async function (e) {
+              if (e.target.checked) {
+                statusText.style.color = '#10b981';
+                if (isSkilledWorker) window.WorkerTracker.startTracking(profile.id);
+                UIHelpers.showToast('Đã bật trạng thái sẵn sàng!', 'success');
+                await ApiService.updateProfile({ ready_to_work: true });
+              } else {
+                statusText.style.color = '#475569';
+                window.WorkerTracker.stopTracking();
+                UIHelpers.showToast('Đã tắt trạng thái sẵn sàng.', 'warning');
+                await ApiService.updateProfile({ ready_to_work: false });
+              }
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Profile load error:', err);
+        if (err.status === 401) handleLogout();
+      }
+
+      await loadJobs();
+      initMap();
+      loadNotifications();
+      
+      // Tự động làm mới thông báo mỗi 30 giây
+      setInterval(loadNotifications, 30000);
+      
+      // Popular tags & Location btn
+      document.querySelectorAll('.popular-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+          document.querySelector('.keyword-input').value = tag.textContent.trim();
+          handleSearch(new Event('submit'));
+        });
+      });
+
+      const locationBtn = document.querySelector('.current-location-btn');
+      if (locationBtn) {
+        locationBtn.addEventListener('click', () => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+              userLat = pos.coords.latitude; userLng = pos.coords.longitude;
+              document.querySelector('.location-input').value = 'Vị trí hiện tại';
+              ApiService.updateProfile({ gps_lat: userLat, gps_lng: userLng }).catch(() => {});
+            });
+          }
+        });
+      }
+    });
+
+    // ==========================================
+    // Tab & Data Loading
+    // ==========================================
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.style.background = 'white'; btn.style.color = '#475569'; btn.style.borderColor = '#e2e8f0';
+        btn.classList.remove('active');
+      });
+      const activeBtn = tab === 'all' ? 'tabAllJobs' : tab === 'applied' ? 'tabMyApps' : 'tabRecommend';
+      const el = document.getElementById(activeBtn);
+      el.style.background = 'var(--primary)'; el.style.color = 'white'; el.style.borderColor = 'var(--primary)'; el.classList.add('active');
+      if (tab === 'all') loadJobs();
+      else if (tab === 'applied') loadMyApplications();
+      else if (tab === 'recommend') loadRecommendations();
+    }
+
+    async function loadJobs(keyword = null, location = null) {
+      const container = document.getElementById('jobListContainer');
+      const countEl = document.getElementById('jobCount');
+      UIHelpers.showLoading(container);
+      try {
+        let jobs = (keyword || location) ? await ApiService.searchJobs(keyword, location, userLat, userLng) : await ApiService.getJobs();
+        if (jobs && Array.isArray(jobs)) {
+          countEl.textContent = `${jobs.length} công việc`;
+          if (jobs.length === 0) {
+            container.innerHTML = '<div style="padding:48px; text-align:center; color:#6b7280;"><p>Chưa có công việc nào</p></div>';
+            return;
+          }
+          container.innerHTML = jobs.map(job => UIHelpers.renderJobCard(job, true)).join('');
+        }
+      } catch (err) { container.innerHTML = '<p style="text-align:center; padding:24px;">Lỗi tải dữ liệu</p>'; }
+    }
+
+    async function loadMyApplications() {
+      const container = document.getElementById('jobListContainer');
+      UIHelpers.showLoading(container);
+      try {
+        const apps = await ApiService.getMyApplications();
+        if (apps && Array.isArray(apps)) {
+          if (apps.length === 0) {
+            container.innerHTML = '<p style="text-align:center; padding:48px;">Chưa ứng tuyển công việc nào</p>';
+            return;
+          }
+          container.innerHTML = apps.map(app => `
+            <article class="job-card" style="padding:20px; border-radius:12px; margin-bottom:12px; border:1px solid #e2e8f0;">
+              <h2 style="font-size:16px; margin:0 0 8px 0;">${app.job_title}</h2>
+              <p style="margin:0; font-size:14px; color:#64748b;">${app.company}</p>
+              <p style="margin:8px 0 0 0; font-size:12px;">Trạng thái: <span style="font-weight:700; color:var(--primary);">${app.status}</span></p>
+            </article>
+          `).join('');
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    async function loadRecommendations() {
+      const container = document.getElementById('jobListContainer');
+      const skill = prompt('Nhập kỹ năng (vd: Python, React):');
+      if (!skill) return;
+      UIHelpers.showLoading(container);
+      try {
+        const jobs = await ApiService.getRecommendations(skill);
+        if (jobs && Array.isArray(jobs)) {
+          container.innerHTML = jobs.map(job => UIHelpers.renderJobCard(job, true)).join('');
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    async function handleSearch(event) {
+      event.preventDefault();
+      const keywords = document.querySelector('.keyword-input').value.trim();
+      const location = document.querySelector('.location-input').value.trim();
+      switchTab('all');
+      await loadJobs(keywords, location);
+    }
+
+    async function handleApply(jobId) {
+      try {
+        const res = await ApiService.applyJob(jobId);
+        UIHelpers.showToast(res.message, res.message.includes('success') ? 'success' : 'warning');
+      } catch (err) { UIHelpers.showToast('Lỗi ứng tuyển', 'error'); }
+    }
+
+    // ==========================================
+    // Notifications
+    // ==========================================
+    function toggleNotifications(e) {
+      if (e) e.stopPropagation();
+      const dropdown = document.getElementById('notificationDropdown');
+      dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+      if (dropdown.style.display === 'block') loadNotifications();
+    }
+
+    async function loadNotifications() {
+      const list = document.getElementById('notificationList');
+      const badge = document.getElementById('notificationBadge');
+      try {
+        const notifications = await ApiService.getNotifications();
+        if (notifications && Array.isArray(notifications)) {
+          const unread = notifications.filter(n => !n.is_read).length;
+          badge.textContent = unread; badge.style.display = unread > 0 ? 'flex' : 'none';
+          if (notifications.length === 0) {
+            list.innerHTML = '<p style="padding:20px; text-align:center; color:#64748b; font-size:13px;">Không có thông báo mới</p>';
+          } else {
+            list.innerHTML = notifications.map(n => `
+              <div class="notification-item" style="padding:12px 16px; border-bottom:1px solid #f1f5f9; background:${n.is_read ? '#fff' : '#f0f9ff'}; cursor:pointer;" onclick="handleNotificationClick(${n.id})">
+                <p style="margin:0; font-size:13px; font-weight:${n.is_read ? '500' : '700'}; color:#1e293b;">${n.title}</p>
+                <p style="margin:4px 0 0 0; font-size:12px; color:#64748b;">${n.message}</p>
+              </div>
+            `).join('');
+          }
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    async function handleNotificationClick(id) {
+      try { await ApiService.markAsRead(id); loadNotifications(); } catch (err) { console.error(err); }
+    }
+
+    async function markAllRead(e) {
+      e.stopPropagation();
+      try { await ApiService.markAllAsRead(); loadNotifications(); } catch (err) { console.error(err); }
+    }
+
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('notificationDropdown');
+      if (dropdown && !dropdown.contains(e.target) && !e.target.innerText.includes('🔔')) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+    // ==========================================
+    // Map & Modal
+    // ==========================================
+    function initMap() {
+      if (!document.getElementById('map')) return;
+      currentMap = L.map('map', { zoomControl: false, attributionControl: false }).setView([16.0544, 108.2022], 13);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(currentMap);
+      loadMapMarkers();
+    }
+
+    async function loadMapMarkers() {
+      try {
+        const jobs = await ApiService.getJobs();
+        const jobIcon = L.divIcon({ html: `<div style="background:var(--primary, #4F46E5); width:30px; height:30px; border-radius:50%; border:2px solid white;"></div>`, iconSize: [30, 30] });
+        jobs.forEach(job => {
+          if (job.gps_lat && job.gps_lng) {
+            L.marker([job.gps_lat, job.gps_lng], { icon: jobIcon }).addTo(currentMap)
+              .bindPopup(`<b>${job.title}</b><br>${job.company}`);
+          }
+        });
+      } catch (err) { console.error(err); }
+    }
+
+    async function viewJobDetail(jobId) {
+      const modal = document.getElementById('jobDetailModal');
+      const content = document.getElementById('jobDetailContent');
+      modal.style.display = 'block'; document.body.style.overflow = 'hidden';
+      content.innerHTML = '<p>Đang tải...</p>';
+      try {
+        const job = await ApiService.getJobDetail(jobId);
+        content.innerHTML = `
+          <div style="display:flex; justify-content:space-between;">
+            <h2>${job.title}</h2>
+            <button onclick="closeJobModal()" style="border:none; background:none; font-size:24px; cursor:pointer;">✕</button>
+          </div>
+          <p><b>Công ty:</b> ${job.company}</p>
+          <p><b>Lương:</b> ${job.salary}</p>
+          <p><b>Địa chỉ:</b> ${job.address}</p>
+          <div style="margin-top:16px;">${job.description.replace(/\n/g, '<br>')}</div>
+          <button onclick="handleApply(${job.id}); closeJobModal();" style="margin-top:24px; width:100%; padding:14px; background:var(--primary); color:white; border:none; border-radius:12px; font-weight:700; cursor:pointer;">Ứng Tuyển Ngay</button>
+        `;
+      } catch (err) { content.innerHTML = '<p>Lỗi tải chi tiết</p>'; }
+    }
+
+    function closeJobModal() { document.getElementById('jobDetailModal').style.display = 'none'; document.body.style.overflow = ''; }
+
+    // ==========================================
+    // Auth
+    // ==========================================
+    function handleLogout() {
+      if (confirm('Bạn có chắc muốn đăng xuất?')) {
+        TokenService.removeToken();
+        localStorage.clear();
+        window.location.replace('login.html');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+19:50:52 [WARNING] [cache] Could not load fingerprints: ('28000', "[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456)")
+19:50:52 [WARNING] [cross_cache] Could not load baseline: ('28000', "[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456)")
+19:50:53 [INFO] ✅ Connected to existing Chrome session
+19:50:53 [INFO] 📋 Session: 1 groups
+19:50:53 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=16 past IDs
+19:51:02 [INFO]    ↓ Scrolling to load posts...
+19:52:11 [DEBUG]    ✓ Article selector: 'div[role='article']' → 3 found
+19:52:11 [DEBUG]    → 3 articles found via locator
+19:52:11 [DEBUG]    ⏭ Article #0: content quá ngắn (4 chars), bỏ qua
+19:52:11 [INFO]    → Found 0 post containers
+19:52:11 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +0 jobs
+19:52:11 [INFO] 🏁 Crawl finished: 0 total jobs
+20:03:09 [WARNING] [cache] Could not load fingerprints: ('28000', "[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456)")
+20:03:09 [WARNING] [cross_cache] Could not load baseline: ('28000', "[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456)")
+20:03:10 [INFO] ✅ Connected to existing Chrome session
+20:03:10 [INFO] 📋 Session: 1 groups
+20:03:10 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=16 past IDs
+20:03:21 [INFO]    ↓ Scrolling to load posts...
+20:04:22 [DEBUG]    ✓ Article selector: 'div[role='article']' → 5 found
+20:04:22 [DEBUG]    → 5 articles found via locator
+20:04:22 [DEBUG]    ⏭ Article #0: content quá ngắn (4 chars), bỏ qua
+20:04:23 [DEBUG]    ⏭ Article #1: content quá ngắn (6 chars), bỏ qua
+20:04:23 [DEBUG]    ⏭ Article #2: content quá ngắn (17 chars), bỏ qua
+20:04:23 [INFO]    → Found 0 post containers
+20:04:23 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +0 jobs
+20:04:23 [INFO] 🏁 Crawl finished: 0 total jobs
+20:07:47 [WARNING] [cache] Could not load fingerprints: ('28000', "[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456)")
+20:07:47 [WARNING] [cross_cache] Could not load baseline: ('28000', "[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456)")
+20:07:47 [WARNING] Failed to load verified entities: ('28000', "[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'. (18456)")
+20:07:51 [INFO] ✅ Connected to existing Chrome session
+20:07:52 [INFO] 📋 Session: 1 groups
+20:07:52 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=24 past IDs
+20:08:01 [INFO]    ↓ Scrolling to load posts...
+20:08:56 [DEBUG]    ✓ Article selector: 'div[role='article']' → 3 found
+20:08:56 [DEBUG]    → 3 articles found via locator
+20:08:56 [DEBUG]    ⏭ Article #0: content quá ngắn (4 chars), bỏ qua
+20:08:56 [INFO]    → Found 0 post containers
+20:08:56 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +0 jobs
+20:08:57 [INFO] 🏁 Crawl finished: 0 total jobs
+20:19:45 [ERROR] ❌ Cannot connect to Chrome: BrowserType.connect_over_cdp: Timeout 180000ms exceeded.
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+  - <ws connecting> ws://localhost:9222/devtools/browser/04b6755b-2a06-4fe0-8be5-c0aa2b346956
+  - <ws connected> ws://localhost:9222/devtools/browser/04b6755b-2a06-4fe0-8be5-c0aa2b346956
+
+20:19:45 [INFO] 💡 Run: chrome.exe --remote-debugging-port=9222 --user-data-dir=...
+20:23:05 [INFO] ✅ Connected to existing Chrome session
+20:23:05 [INFO] 📋 Session: 1 groups
+20:23:05 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=24 past IDs
+20:23:17 [INFO]    ↓ Scrolling to load posts...
+20:25:04 [DEBUG]    ✓ Article selector: 'div[role='article']' → 5 found
+20:25:04 [DEBUG]    → 5 articles found via locator
+20:25:05 [DEBUG]    ⏭ Article #0: content quá ngắn (4 chars), bỏ qua
+20:25:05 [DEBUG]    ⏭ Article #1: content quá ngắn (6 chars), bỏ qua
+20:25:05 [DEBUG]    ⏭ Article #2: content quá ngắn (17 chars), bỏ qua
+20:25:05 [INFO]    → Found 0 post containers
+20:25:05 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +0 jobs
+20:25:05 [INFO] 🏁 Crawl finished: 0 total jobs
+20:28:20 [INFO] ✅ Connected to existing Chrome session
+20:28:20 [INFO] 📋 Session: 1 groups
+20:28:20 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=24 past IDs
+20:28:30 [INFO]    ↓ Scrolling to load posts...
+20:29:33 [DEBUG]    ✓ Article selector: 'div[role='article']' → 3 found
+20:29:33 [DEBUG]    → 3 articles found via locator
+20:29:33 [DEBUG]    ⏭ Article #0: content quá ngắn (4 chars), bỏ qua
+20:29:33 [INFO]    → Found 0 post containers
+20:29:33 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +0 jobs
+20:29:33 [INFO] 🏁 Crawl finished: 0 total jobs
+20:31:52 [INFO] ✅ Connected to existing Chrome session
+20:31:52 [INFO] 📋 Session: 1 groups
+20:31:52 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=24 past IDs
+20:32:04 [INFO]    ↓ Scrolling to load posts...
+20:33:11 [DEBUG]    ✓ Article selector: 'div[role='article']' → 5 found
+20:33:11 [DEBUG]    → 5 articles found via locator
+20:33:11 [DEBUG]    [tc] Used raw article inner_text Fallback: 40 chars
+20:33:11 [DEBUG]    ⏭ Article #0: content quá ngắn (40 chars), bỏ qua
+20:33:12 [DEBUG]    [tc] Used raw article inner_text Fallback: 43 chars
+20:33:12 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+20:33:12 [INFO]    → Found 2 post containers
+20:33:15 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +1 jobs
+20:33:15 [INFO] 🏁 Crawl finished: 1 total jobs
+20:33:15 [DEBUG] 🔍 JOB_SEEKING [Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test)]: unknown: basic_kw=False
+20:33:15 [INFO] 📈 [Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test)] trust=1.0 | high
+20:33:15 [INFO] 
+✅ done: total=1 | spam=0 | dup=0 | skip_db=0 | inserted=0 | errors=0
+20:34:15 [INFO] ✅ Connected to existing Chrome session
+20:34:15 [INFO] 📋 Session: 1 groups
+20:34:15 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=25 past IDs
+20:34:25 [INFO]    ↓ Scrolling to load posts...
+20:36:18 [DEBUG]    ✓ Article selector: 'div[role='article']' → 3 found
+20:36:18 [DEBUG]    → 3 articles found via locator
+20:36:19 [DEBUG]    [tc] Used raw article inner_text Fallback: 40 chars
+20:36:19 [DEBUG]    ⏭ Article #0: content quá ngắn (40 chars), bỏ qua
+20:36:19 [INFO]    → Found 0 post containers
+20:36:19 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +0 jobs
+20:36:19 [INFO] 🏁 Crawl finished: 0 total jobs
+20:39:32 [INFO] ✅ Connected to existing Chrome session
+20:39:33 [INFO] 📋 Session: 1 groups
+20:39:33 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=25 past IDs
+20:39:42 [INFO]    ↓ Scrolling to load posts...
+20:40:41 [DEBUG]    ✓ Article selector: 'div[role='article']' → 5 found
+20:40:41 [DEBUG]    → 5 articles found via locator
+20:40:42 [DEBUG]    [tc] Used raw article inner_text Fallback: 40 chars
+20:40:42 [DEBUG]    [tc] Used raw article inner_text Fallback: 43 chars
+20:40:43 [DEBUG]    [tc] content empty or too short, returning None
+20:40:43 [DEBUG]    [tc] content empty or too short, returning None
+20:40:43 [INFO]    → Found 3 post containers
+20:40:45 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +1 jobs
+20:40:45 [INFO] 🏁 Crawl finished: 1 total jobs
+20:40:45 [DEBUG] 🔍 JOB_SEEKING [Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test)]: unknown: basic_kw=False
+20:40:45 [INFO] 📈 [Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test)] trust=1.0 | high
+20:40:45 [INFO] 
+✅ done: total=1 | spam=0 | dup=0 | skip_db=0 | inserted=0 | errors=0
+20:42:27 [INFO] ✅ Connected to existing Chrome session
+20:42:27 [INFO] 📋 Session: 1 groups
+20:42:27 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=26 past IDs
+20:42:40 [INFO]    ↓ Scrolling to load posts...
+20:43:50 [DEBUG]    ✓ Article selector: 'div[role='article']' → 3 found
+20:43:50 [DEBUG]    → 3 articles found via locator
+20:43:50 [DEBUG]    ⏭ Article #0: content quá ngắn (4 chars), bỏ qua
+20:43:51 [INFO]    → Found 0 post containers
+20:43:51 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +0 jobs
+20:43:51 [INFO] 🏁 Crawl finished: 0 total jobs
+20:51:03 [INFO] ✅ Connected to existing Chrome session
+20:51:03 [INFO] 📋 Session: 1 groups
+20:51:03 [INFO] 🌐 Group: Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test) | seen=26 past IDs
+20:51:14 [INFO]    ↓ Scrolling to load posts...
+20:52:13 [DEBUG]    ✓ Article selector: 'div[role='article']' → 5 found
+20:52:13 [DEBUG]    → 5 articles found via locator
+20:52:13 [DEBUG]    [tc] Used raw article inner_text Fallback: 40 chars
+20:52:13 [DEBUG]    [tc] Used raw article inner_text Fallback: 40 chars
+20:52:14 [DEBUG]    [tc] Used raw article inner_text Fallback: 43 chars
+20:52:14 [DEBUG]    [tc] Used raw article inner_text Fallback: 43 chars
+20:52:15 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+20:52:15 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+20:52:15 [INFO]    → Found 3 post containers
+20:52:16 [INFO] ✅ Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test): +1 jobs
+20:52:16 [INFO] 🏁 Crawl finished: 1 total jobs
+20:52:16 [DEBUG] 🔍 JOB_SEEKING [Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test)]: unknown: basic_kw=False
+20:52:16 [INFO] 📈 [Hội Tìm Việc Làm Thêm SV Đà Nẵng (Target Test)] trust=1.0 | high
+20:52:16 [INFO] 
+✅ done: total=1 | spam=0 | dup=0 | skip_db=0 | inserted=0 | errors=0
+20:59:37 [INFO] ✅ Connected to existing Chrome session
+20:59:37 [INFO] 📋 Session: 2 groups
+20:59:37 [INFO] 🌐 Group: Tìm kiếm việc làm tại Đà Nẵng | seen=15 past IDs
+20:59:47 [INFO]    ↓ Scrolling to load posts...
+21:01:25 [DEBUG]    ✓ Article selector: 'div[role='article']' → 18 found
+21:01:25 [DEBUG]    → 18 articles found via locator
+21:01:28 [DEBUG]    [tc] Used raw article inner_text Fallback: 51 chars
+21:01:29 [DEBUG]    [tc] Used raw article inner_text Fallback: 51 chars
+21:01:30 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+21:01:31 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+21:01:32 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+21:01:33 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+21:01:42 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+21:01:42 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+21:01:44 [INFO]    → Found 18 post containers
+21:01:56 [INFO] ✅ Tìm kiếm việc làm tại Đà Nẵng: +8 jobs
+21:02:28 [INFO] 🌐 Group: Hội Việc Làm Đà Nẵng - Viec Lam Da Nang | seen=10 past IDs
+21:02:48 [INFO]    ↓ Scrolling to load posts...
+21:05:37 [DEBUG]    ✓ Article selector: 'div[role='article']' → 13 found
+21:05:37 [DEBUG]    → 13 articles found via locator
+21:05:46 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+21:05:47 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+21:05:49 [DEBUG]    [tc] Used raw article inner_text Fallback: 50 chars
+21:05:49 [DEBUG]    [tc] Used raw article inner_text Fallback: 50 chars
+21:05:50 [DEBUG]    [tc] Used raw article inner_text Fallback: 59 chars
+21:05:51 [DEBUG]    [tc] Used raw article inner_text Fallback: 59 chars
+21:05:51 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+21:05:51 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+21:05:51 [INFO]    → Found 11 post containers
+21:05:54 [INFO] ✅ Hội Việc Làm Đà Nẵng - Viec Lam Da Nang: +3 jobs
+21:05:54 [INFO] 🏁 Crawl finished: 11 total jobs
+21:05:55 [ERROR] ❌ DB error [Tìm kiếm việc làm tại Đà Nẵng]: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+21:05:55 [ERROR] ❌ DB error [Tìm kiếm việc làm tại Đà Nẵng]: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+21:05:55 [ERROR] ❌ DB error [Tìm kiếm việc làm tại Đà Nẵng]: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+21:05:55 [ERROR] ❌ DB error [Tìm kiếm việc làm tại Đà Nẵng]: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+21:05:55 [DEBUG] 🔍 JOB_SEEKING [Tìm kiếm việc làm tại Đà Nẵng]: unknown: basic_kw=False
+21:05:55 [ERROR] ❌ DB error [Tìm kiếm việc làm tại Đà Nẵng]: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+21:05:55 [ERROR] ❌ DB error [Tìm kiếm việc làm tại Đà Nẵng]: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+21:05:55 [DEBUG] 🔍 JOB_SEEKING [Tìm kiếm việc làm tại Đà Nẵng]: unknown: basic_kw=False
+21:05:55 [ERROR] ❌ DB error [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+21:05:55 [DEBUG] 🔍 JOB_SEEKING [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: unknown: basic_kw=False
+21:05:55 [DEBUG] 🔍 JOB_SEEKING [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: unknown: basic_kw=False
+21:05:55 [INFO] 📈 [Tìm kiếm việc làm tại Đà Nẵng] trust=1.0 | high
+21:05:55 [INFO] 📈 [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang] trust=1.0 | high
+21:05:55 [INFO] 
+✅ done: total=11 | spam=0 | dup=0 | skip_db=0 | inserted=0 | errors=7
+21:12:12 [INFO] ✅ Connected to existing Chrome session
+21:12:12 [INFO] 📋 Session: 2 groups
+21:12:12 [INFO] 🌐 Group: Hội Việc Làm Đà Nẵng - Viec Lam Da Nang | seen=13 past IDs
+21:12:25 [INFO]    ↓ Scrolling to load posts...
+21:13:59 [DEBUG]    ✓ Article selector: 'div[role='article']' → 12 found
+21:13:59 [DEBUG]    → 12 articles found via locator
+21:14:01 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+21:14:01 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+21:14:03 [DEBUG]    [tc] Used raw article inner_text Fallback: 50 chars
+21:14:04 [DEBUG]    [tc] Used raw article inner_text Fallback: 50 chars
+21:14:06 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+21:14:07 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+21:14:07 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+21:14:07 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+21:14:07 [INFO]    → Found 10 post containers
+21:14:07 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Tâm Lê Thanh'
+21:14:08 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Lương Hạnh'
+21:14:10 [INFO] ✅ Hội Việc Làm Đà Nẵng - Viec Lam Da Nang: +2 jobs
+21:15:17 [INFO] 🌐 Group: Việc Làm Đà Nẵng | seen=0 past IDs
+21:15:26 [INFO]    ↓ Scrolling to load posts...
+21:16:38 [DEBUG]    ✓ Article selector: 'div[role='article']' → 9 found
+21:16:38 [DEBUG]    → 9 articles found via locator
+21:16:38 [DEBUG]    [tc] Used raw article inner_text Fallback: 44 chars
+21:16:43 [DEBUG]    [tc] Used raw article inner_text Fallback: 44 chars
+21:17:07 [DEBUG]    [tc] Used raw article inner_text Fallback: 65 chars
+21:17:08 [DEBUG]    [tc] Used raw article inner_text Fallback: 65 chars
+21:17:09 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+21:17:09 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+21:17:09 [INFO]    → Found 7 post containers
+21:17:09 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'PositiveFlower2669'
+21:17:10 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Nguyễn Thị Quỳnh Hương'
+21:17:11 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'phan huy thống'
+21:17:12 [INFO] ✅ Việc Làm Đà Nẵng: +3 jobs
+21:17:12 [INFO] 🏁 Crawl finished: 5 total jobs
+21:17:13 [DEBUG] 🔍 JOB_SEEKING [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: unknown: basic_kw=False
+21:17:13 [DEBUG] 🔍 JOB_SEEKING [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: unknown: basic_kw=False
+21:17:13 [DEBUG] 🔍 JOB_SEEKING [Việc Làm Đà Nẵng]: unknown: basic_kw=False
+21:17:13 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: Muốn thu nhập ổn + môi trường xịn? Vào Apollo liền
+21:17:13 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: DỤNG NHÂN VIÊN PHỤC VỤ NHÀ HÀNG
+21:17:13 [INFO] 📈 [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang] trust=1.0 | high
+21:17:13 [INFO] 📈 [Việc Làm Đà Nẵng] trust=1.0 | high
+21:17:13 [INFO] 
+✅ done: total=5 | spam=0 | dup=0 | skip_db=0 | inserted=2 | errors=0
+22:26:25 [INFO] [cache] Loaded 2 fingerprints from DB
+22:26:25 [INFO] ✅ Chrome is already running on port 9222
+22:26:26 [INFO] ✅ Connected to existing Chrome session
+22:26:26 [INFO] 📋 Session: 2 groups
+22:26:26 [INFO] 🌐 Group: Tìm kiếm việc làm tại Đà Nẵng | seen=23 past IDs
+22:26:37 [INFO]    ↓ Scrolling to load posts...
+22:28:15 [DEBUG]    ✓ Article selector: 'div[role='article']' → 18 found
+22:28:15 [DEBUG]    → 18 articles found via locator
+22:28:15 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '1 tuần'
+22:28:15 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '1 tuần'
+22:28:18 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+22:28:19 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+22:28:19 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+22:28:19 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+22:28:20 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+22:28:20 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+22:28:28 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+22:28:29 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+22:28:30 [INFO]    → Found 18 post containers
+22:28:30 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Thu Thảo'
+22:28:31 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'SORA Coffee & Milk Tea'
+22:28:33 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Tyty Phuong Thuy Nguyen'
+22:28:34 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Linh Nguyễn'
+22:28:35 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Son Nguyen'
+22:28:36 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'quán nhậu lợi my'
+22:28:37 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Trần Lương Hậu'
+22:28:39 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Trần Lương Hậu'
+22:28:41 [INFO] ✅ Tìm kiếm việc làm tại Đà Nẵng: +8 jobs
+22:29:27 [INFO] 🌐 Group: Việc Làm Đà Nẵng | seen=0 past IDs
+22:29:37 [INFO]    ↓ Scrolling to load posts...
+22:32:22 [DEBUG]    ✓ Article selector: 'div[role='article']' → 14 found
+22:32:22 [DEBUG]    → 14 articles found via locator
+22:32:22 [DEBUG]    [tc] Used raw article inner_text Fallback: 57 chars
+22:32:23 [DEBUG]    [tc] Used raw article inner_text Fallback: 57 chars
+22:32:24 [DEBUG]    [tc] Used raw article inner_text Fallback: 42 chars
+22:32:24 [DEBUG]    [tc] Used raw article inner_text Fallback: 42 chars
+22:32:50 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '2 giờ'
+22:32:53 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '3 giờ'
+22:32:54 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '3 giờ'
+22:32:54 [DEBUG]    [tc] Used raw article inner_text Fallback: 59 chars
+22:32:55 [DEBUG]    [tc] Used raw article inner_text Fallback: 59 chars
+22:32:55 [INFO]    → Found 14 post containers
+22:32:55 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Lê Thị Thu Hiền'
+22:32:57 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'LyLy Nguyễn'
+22:32:58 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Hằng Nguyễn'
+22:33:00 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Nhật Lệ'
+22:33:01 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Hữu Tâm'
+22:33:03 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Khả Hân'
+22:33:05 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Nhật Ánhh'
+22:33:07 [INFO] ✅ Việc Làm Đà Nẵng: +8 jobs
+22:33:07 [INFO] 🏁 Crawl finished: 16 total jobs
+22:33:07 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: Nhân viên bán bánh mỳ que
+22:33:07 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: NHÂN SỰ
+22:33:07 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: NHÀ HÀNG PHỞ BÀ MAI TUYỂN DỤNG:
+22:33:07 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: THÊM 1 NHÂN VIÊN NỮ GIẶT SẤY]
+22:33:07 [DEBUG] 🔍 JOB_SEEKING [Tìm kiếm việc làm tại Đà Nẵng]: unknown: basic_kw=False
+22:33:07 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: Phụ ko ạ
+22:33:07 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: Dụng thêm nhân sự . vị trí pha chế. có nhận đào tạ
+22:33:07 [DEBUG] 🔍 JOB_SEEKING [Tìm kiếm việc làm tại Đà Nẵng]: unknown: basic_kw=False
+22:33:07 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: Thêm 4 bạn
+22:33:07 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: NHÂN VIÊN BÁN HÀNG THẾ GIỚI SỮA
+22:33:08 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: Tiếp Thị bia HUDA khu vực Đà Nẵng
+22:33:08 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: Nhà hàng HQ tuyển
+22:33:09 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: Nhân viên Partime bán Xôi và bánh mì tại 113 Đống 
+22:33:09 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: NHÂN SỰ KHỐI NHÀ HÀNG**
+22:33:09 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: Pg bán sản phẩm cho cty bia SG. Làm ib cho chị nha
+22:33:09 [DEBUG] ✅ INSERT [Việc Làm Đà Nẵng]: NHÂN VIÊN
+22:33:09 [INFO] 📈 [Tìm kiếm việc làm tại Đà Nẵng] trust=1.0 | high
+22:33:09 [INFO] 📈 [Việc Làm Đà Nẵng] trust=1.0 | high
+22:33:09 [INFO] 
+✅ done: total=16 | spam=0 | dup=0 | skip_db=0 | inserted=14 | errors=0
+22:38:38 [WARNING] [cache] Could not load fingerprints: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+22:38:38 [WARNING] [cross_cache] Could not load baseline: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+22:38:38 [INFO] ✅ Chrome is already running on port 9222
+22:38:39 [INFO] ✅ Connected to existing Chrome session
+22:38:39 [INFO] 📋 Session: 2 groups
+22:38:39 [INFO] 🌐 Group: Việc làm Đà Nẵng full/part-time SV | seen=0 past IDs
+22:38:50 [INFO]    ↓ Scrolling to load posts...
+22:40:19 [DEBUG]    ✓ Article selector: 'div[role='article']' → 15 found
+22:40:19 [DEBUG]    → 15 articles found via locator
+22:40:22 [DEBUG]    [tc] Used raw article inner_text Fallback: 41 chars
+22:40:22 [DEBUG]    [tc] Used raw article inner_text Fallback: 41 chars
+22:40:27 [DEBUG]    [tc] Got 44 chars via textContent
+22:40:27 [DEBUG]    [tc] Got 44 chars via textContent
+22:40:30 [INFO]    → Found 15 post containers
+22:40:30 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Võ Lê Hồng'
+22:40:31 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Hương Anh Ngữ Iris'
+22:40:33 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'ScenicCaterpillar3981'
+22:40:35 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Võ Thùy Trinh'
+22:40:36 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Thắm Phạm'
+22:40:37 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Quỳnh Trâmm'
+22:40:39 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'BrightSalamander1330'
+22:40:40 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'hihi600'
+22:40:42 [INFO] ✅ Việc làm Đà Nẵng full/part-time SV: +8 jobs
+22:41:29 [INFO] 🌐 Group: Hội Việc Làm Đà Nẵng - Viec Lam Da Nang | seen=15 past IDs
+22:41:40 [INFO]    ↓ Scrolling to load posts...
+22:43:09 [DEBUG]    ✓ Article selector: 'div[role='article']' → 18 found
+22:43:09 [DEBUG]    → 18 articles found via locator
+22:43:13 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+22:43:13 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+22:43:15 [DEBUG]    [tc] Used raw article inner_text Fallback: 53 chars
+22:43:15 [DEBUG]    [tc] Used raw article inner_text Fallback: 53 chars
+22:43:16 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '6 ngày'
+22:43:17 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '6 ngày'
+22:43:24 [INFO]    → Found 18 post containers
+22:43:24 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Felix Hoang'
+22:43:25 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Tâm Trung'
+22:43:27 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Cú_đêm_113'
+22:43:29 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Kim Oanhh'
+22:43:31 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Phương Trinh'
+22:43:32 [INFO] ✅ Hội Việc Làm Đà Nẵng - Viec Lam Da Nang: +5 jobs
+22:43:32 [INFO] 🏁 Crawl finished: 13 total jobs
+22:48:22 [WARNING] [cache] Could not load fingerprints: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+22:48:22 [WARNING] [cross_cache] Could not load baseline: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+22:48:22 [INFO] ✅ Chrome is already running on port 9222
+22:48:22 [INFO] ✅ Connected to existing Chrome session
+22:48:23 [INFO] 📋 Session: 2 groups
+22:48:23 [INFO] 🌐 Group: VIỆC LÀM THỜI VỤ ĐÀ NẴNG GROUP | seen=5 past IDs
+22:48:31 [INFO]    ↓ Scrolling to load posts...
+22:50:13 [DEBUG]    ✓ Article selector: 'div[role='article']' → 4 found
+22:50:13 [DEBUG]    → 4 articles found via locator
+22:50:14 [DEBUG]    [tc] Used raw article inner_text Fallback: 45 chars
+22:50:15 [DEBUG]    [tc] Used raw article inner_text Fallback: 45 chars
+22:50:15 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+22:50:15 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+22:50:15 [INFO]    → Found 2 post containers
+22:50:15 [INFO] ✅ VIỆC LÀM THỜI VỤ ĐÀ NẴNG GROUP: +0 jobs
+22:51:10 [INFO] 🌐 Group: Việc Làm Đà Nẵng | seen=8 past IDs
+22:51:19 [INFO]    ↓ Scrolling to load posts...
+22:53:13 [DEBUG]    ✓ Article selector: 'div[role='article']' → 12 found
+22:53:13 [DEBUG]    → 12 articles found via locator
+22:53:14 [DEBUG]    [tc] Used raw article inner_text Fallback: 57 chars
+22:53:14 [DEBUG]    [tc] Used raw article inner_text Fallback: 57 chars
+22:53:14 [DEBUG]    [tc] Used raw article inner_text Fallback: 42 chars
+22:53:15 [DEBUG]    [tc] Used raw article inner_text Fallback: 42 chars
+22:53:27 [INFO]    → Found 12 post containers
+22:53:27 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Lê Thị Thu Hiền'
+22:53:28 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'LyLy Nguyễn'
+22:53:30 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Hằng Nguyễn'
+22:53:32 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Nhật Lệ'
+22:53:34 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Hữu Tâm'
+22:53:35 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Khả Hân'
+22:53:37 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Nhật Ánhh'
+22:53:39 [INFO] ✅ Việc Làm Đà Nẵng: +8 jobs
+22:53:39 [INFO] 🏁 Crawl finished: 8 total jobs
+22:57:42 [WARNING] [cache] Could not load fingerprints: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+22:57:42 [WARNING] [cross_cache] Could not load baseline: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+22:57:42 [INFO] ✅ Chrome is already running on port 9222
+22:57:43 [INFO] ✅ Connected to existing Chrome session
+22:57:43 [INFO] 📋 Session: 2 groups
+22:57:43 [INFO] 🌐 Group: Việc làm Đà Nẵng full/part-time SV | seen=8 past IDs
+22:57:55 [INFO]    ↓ Scrolling to load posts...
+22:59:43 [DEBUG]    ✓ Article selector: 'div[role='article']' → 15 found
+22:59:43 [DEBUG]    → 15 articles found via locator
+23:01:25 [WARNING] [cache] Could not load fingerprints: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+23:01:25 [WARNING] [cross_cache] Could not load baseline: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'quang123\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "findJob" requested by the login. The login failed. (4060)')
+23:01:25 [INFO] ✅ Chrome is already running on port 9222
+23:01:27 [INFO] ✅ Connected to existing Chrome session
+23:01:27 [INFO] 📋 Session: 2 groups
+23:01:27 [INFO] 🌐 Group: Hội Việc Làm Đà Nẵng - Viec Lam Da Nang | seen=20 past IDs
+23:03:19 [INFO] ✅ Chrome is already running on port 9222
+23:03:20 [INFO] ✅ Connected to existing Chrome session
+23:03:21 [INFO] 📋 Session: 2 groups
+23:03:21 [INFO] 🌐 Group: Hội Việc Làm Đà Nẵng - Viec Lam Da Nang | seen=20 past IDs
+23:03:32 [INFO]    ↓ Scrolling to load posts...
+23:05:49 [DEBUG]    ✓ Article selector: 'div[role='article']' → 13 found
+23:05:49 [DEBUG]    → 13 articles found via locator
+23:05:51 [DEBUG]    [tc] Used raw article inner_text Fallback: 45 chars
+23:05:52 [DEBUG]    [tc] Used raw article inner_text Fallback: 45 chars
+23:06:05 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+23:06:06 [DEBUG]    [tc] Used raw article inner_text Fallback: 48 chars
+23:06:06 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+23:06:06 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+23:06:06 [INFO]    → Found 11 post containers
+23:06:06 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Tâm Trung'
+23:06:07 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Cú_đêm_113'
+23:06:09 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Chelly Huỳnh'
+23:06:11 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Felix Hoang'
+23:06:13 [INFO] ✅ Hội Việc Làm Đà Nẵng - Viec Lam Da Nang: +4 jobs
+23:07:00 [INFO] 🌐 Group: Tìm kiếm việc làm tại Đà Nẵng | seen=31 past IDs
+23:07:11 [INFO]    ↓ Scrolling to load posts...
+23:09:54 [DEBUG]    Scroll 10: 26 articles — stopping
+23:09:55 [DEBUG]    ✓ Article selector: 'div[role='article']' → 26 found
+23:09:56 [DEBUG]    → 26 articles found via locator
+23:09:56 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '1 tuần'
+23:09:56 [INFO]    [time] Tìm thấy thời gian đăng bài từ text thô: '1 tuần'
+23:10:01 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+23:10:01 [DEBUG]    [tc] Used raw article inner_text Fallback: 49 chars
+23:10:02 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:02 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:02 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:03 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:17 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+23:10:17 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+23:10:18 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:19 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:25 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+23:10:26 [DEBUG]    [tc] Used raw article inner_text Fallback: 54 chars
+23:10:28 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:29 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:30 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:31 [DEBUG]    [tc] Used raw article inner_text Fallback: 52 chars
+23:10:31 [DEBUG]    [tc] content empty or too short (0 chars), returning None
+23:10:31 [INFO]    → Found 25 post containers
+23:10:31 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Thu Thảo'
+23:10:32 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'SORA Coffee & Milk Tea'
+23:10:34 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Tyty Phuong Thuy Nguyen'
+23:10:36 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Linh Nguyễn'
+23:10:38 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Son Nguyen'
+23:10:38 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'quán nhậu lợi my'
+23:10:41 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Trần Lương Hậu'
+23:10:42 [DEBUG]    [time] Không thể parse thời gian nội bộ Facebook: 'Trần Lương Hậu'
+23:10:44 [INFO] ✅ Tìm kiếm việc làm tại Đà Nẵng: +8 jobs
+23:10:44 [INFO] 🏁 Crawl finished: 12 total jobs
+23:10:45 [DEBUG] ✅ INSERT [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: Nữ phụ việc (ko y/c k/nghiệm, bằng), k/điểm 6,5tr 
+23:10:45 [DEBUG] ✅ INSERT [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: NHÀ HÀNG 赣粤小厨 – TUYỂN DỤNG
+23:10:45 [DEBUG] ✅ INSERT [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: Phục vụ quán
+23:10:45 [DEBUG] ✅ INSERT [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang]: Nhân viên kế hoạch sản xuất. Quan tâm ib
+23:10:45 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: Nhân viên bán bánh mỳ que
+23:10:45 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: NHÂN SỰ
+23:10:45 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: NHÀ HÀNG PHỞ BÀ MAI TUYỂN DỤNG:
+23:10:45 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: THÊM 1 NHÂN VIÊN NỮ GIẶT SẤY]
+23:10:45 [DEBUG] 🔍 JOB_SEEKING [Tìm kiếm việc làm tại Đà Nẵng]: unknown: basic_kw=False
+23:10:45 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: Phụ ko ạ
+23:10:45 [DEBUG] ✅ INSERT [Tìm kiếm việc làm tại Đà Nẵng]: Dụng thêm nhân sự . vị trí pha chế. có nhận đào tạ
+23:10:45 [DEBUG] 🔍 JOB_SEEKING [Tìm kiếm việc làm tại Đà Nẵng]: unknown: basic_kw=False
+23:10:45 [INFO] 📈 [Hội Việc Làm Đà Nẵng - Viec Lam Da Nang] trust=1.0 | high
+23:10:45 [INFO] 📈 [Tìm kiếm việc làm tại Đà Nẵng] trust=1.0 | high
+23:10:45 [INFO] 
+✅ done: total=12 | spam=0 | dup=0 | skip_db=0 | inserted=10 | errors=0

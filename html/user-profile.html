@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hồ Sơ Cá Nhân - GeoJob</title>
+<link rel="stylesheet" href="../css/globals.css" />
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="../css/auth.css" />
+<style>
+    body {
+        background: #f8faff;
+        overflow-x: hidden;
+    }
+    .profile-page-wrapper {
+        position: relative;
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+    .profile-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 32px;
+        padding: 48px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        position: relative;
+        z-index: 10;
+        max-width: 800px;
+        margin: 0 auto 40px;
+    }
+    .profile-avatar-wrapper {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 24px;
+    }
+    .profile-avatar-large {
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
+        background: linear-gradient(135deg, var(--primary), #8B5CF6);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: 800;
+        box-shadow: 0 20px 40px rgba(79, 70, 229, 0.25);
+        transform: rotate(-5deg);
+        transition: transform 0.3s ease;
+    }
+    .profile-card:hover .profile-avatar-large {
+        transform: rotate(0deg) scale(1.05);
+    }
+    .location-box {
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        padding: 24px;
+        margin: 32px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .location-info h4 {
+        margin: 0 0 4px 0;
+        color: var(--text-dark);
+        font-size: 16px;
+    }
+    .location-info p {
+        margin: 0;
+        color: var(--text-gray);
+        font-size: 13px;
+    }
+    .btn-gps-action {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 14px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        white-space: nowrap;
+    }
+    .btn-gps-action:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+    }
+    /* Re-using auth shapes */
+    .auth-shape:nth-child(1) { top: -10%; left: -5%; width: 400px; height: 400px; background: rgba(79, 70, 229, 0.08); }
+    .auth-shape:nth-child(2) { bottom: 5%; right: -5%; width: 500px; height: 500px; background: rgba(139, 92, 246, 0.05); }
+</style>
+</head>
+<body>
+<div class="tm-kim-vic-lm-qua-bn">
+<header class="top-nav-bar">
+<div class="container">
+<div class="nav-left">
+<a href="user-dashboard.html" class="text" id="navLogo">GeoJob</a>
+</div>
+<nav class="nav-center">
+<a class="nav-link" href="user-dashboard.html">Discover</a>
+<a class="nav-link" href="map-jobs.html">Bản Đồ</a>
+</nav>
+<div class="nav-right" id="navRight">
+<button class="button" type="button" onclick="handleLogout()" style="padding: 8px 16px; background: transparent; border: 1px solid var(--primary); color: var(--primary); border-radius: 8px; cursor: pointer; font-weight: 600;">Đăng Xuất</button>
+</div>
+</div>
+</header>
+
+<div class="profile-page-wrapper">
+<div class="auth-bg-shapes">
+<div class="auth-shape"></div>
+<div class="auth-shape"></div>
+</div>
+
+<main class="profile-card">
+<div class="profile-header">
+<div class="profile-avatar-wrapper">
+<div class="profile-avatar-large" id="bigAvatar">U</div>
+</div>
+<h1 class="auth-title" style="font-size: 32px;">Hồ Sơ Của Bạn</h1>
+<p class="auth-subtitle">Tối ưu hóa vị trí để tìm thấy công việc gần bạn nhất</p>
+</div>
+
+<form id="profileForm" class="auth-form" onsubmit="handleUpdateProfile(event)">
+<div class="form-group">
+<label class="form-label">Họ và tên</label>
+<div class="form-input-wrapper">
+<input type="text" class="form-input" id="profFullname" placeholder="Nhập họ tên đầy đủ" required />
+</div>
+</div>
+
+<div class="form-group">
+<label class="form-label">Email tài khoản</label>
+<div class="form-input-wrapper">
+<input type="email" class="form-input" id="profEmail" disabled style="background: rgba(0,0,0,0.03); color: #94a3b8;" />
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+<div class="form-group">
+<label class="form-label">Vĩ độ (Latitude)</label>
+<div class="form-input-wrapper">
+<input type="number" step="any" class="form-input" id="profLat" placeholder="0.0000" />
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Kinh độ (Longitude)</label>
+<div class="form-input-wrapper">
+<input type="number" step="any" class="form-input" id="profLng" placeholder="0.0000" />
+</div>
+</div>
+</div>
+
+<div class="location-box">
+<div class="location-info">
+<h4>Tự động xác vị trí</h4>
+<p>Lấy tọa độ GPS chính xác từ thiết bị của bạn</p>
+</div>
+<button type="button" class="btn-gps-action" onclick="getCurrentLocation()">
+📍 Lấy tọa độ GPS
+</button>
+</div>
+
+<div class="form-options">
+<div class="remember-me">
+<input type="checkbox" id="profReady" style="width: 20px; height: 20px; cursor: pointer;" />
+<label for="profReady" style="font-weight: 600; color: var(--text-dark); cursor: pointer;">Sẵn sàng làm việc ngay lập tức</label>
+</div>
+</div>
+
+<button type="submit" class="auth-submit-btn" style="margin-top: 40px; height: 56px; font-size: 17px;" id="saveBtn">
+Cập Nhật Hồ Sơ
+</button>
+</form>
+</main>
+</div>
+</div>
+
+<script src="../js/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    if (!TokenService.isLoggedIn()) { window.location.href = 'login.html'; return; }
+    
+    try {
+        const profile = await ApiService.getProfile();
+        if (profile) {
+            document.getElementById('profFullname').value = profile.fullname || '';
+            document.getElementById('profEmail').value = profile.email || '';
+            document.getElementById('profLat').value = profile.gps_lat || '';
+            document.getElementById('profLng').value = profile.gps_lng || '';
+            document.getElementById('profReady').checked = profile.ready_to_work || false;
+            
+            const initial = (profile.fullname || profile.email).charAt(0).toUpperCase();
+            document.getElementById('bigAvatar').textContent = initial;
+        }
+    } catch (err) {
+        UIHelpers.showToast('Không thể tải dữ liệu hồ sơ', 'error');
+    }
+});
+
+async function handleUpdateProfile(e) {
+    e.preventDefault();
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Đang lưu dữ liệu...';
+
+    const data = {
+        fullname: document.getElementById('profFullname').value,
+        gps_lat: parseFloat(document.getElementById('profLat').value) || null,
+        gps_lng: parseFloat(document.getElementById('profLng').value) || null,
+        ready_to_work: document.getElementById('profReady').checked
+    };
+
+    try {
+        await ApiService.updateProfile(data);
+        UIHelpers.showToast('Đã cập nhật hồ sơ thành công!', 'success');
+        document.getElementById('bigAvatar').textContent = data.fullname.charAt(0).toUpperCase();
+    } catch (err) {
+        UIHelpers.showToast('Lỗi khi cập nhật. Vui lòng thử lại.', 'error');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Cập Nhật Hồ Sơ';
+    }
+}
+
+function getCurrentLocation() {
+    if (navigator.geolocation) {
+        UIHelpers.showToast('Đang kết nối GPS...', 'info');
+        navigator.geolocation.getCurrentPosition(pos => {
+            document.getElementById('profLat').value = pos.coords.latitude;
+            document.getElementById('profLng').value = pos.coords.longitude;
+            UIHelpers.showToast('Đã nhận diện vị trí!', 'success');
+        }, () => {
+            UIHelpers.showToast('Lỗi GPS. Hãy bật định vị trên trình duyệt.', 'error');
+        });
+    }
+}
+
+function handleLogout() {
+    TokenService.removeToken();
+    localStorage.clear();
+    window.location.href = 'login.html';
+}
+</script>
+</body>
+</html>
